@@ -1,0 +1,2 @@
+export const AUTORIA_API_KEY = 'Your AUTORIA_API_KEY here';
+export const GOOGLE_OAUTH_CLIENT_ID = 'Your GOOGLE_OAUTH_CLIENT_ID here';

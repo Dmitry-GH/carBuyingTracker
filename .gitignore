@@ -64,5 +64,11 @@ buck-out/
 /ios/Pods/
 
 
-#firebase
+# Firebase
 /android/app/google-services.json
+
+# API keys
+/src/configs/APIKeys.ts
+
+# Signing keys
+/android/keystore.properties
