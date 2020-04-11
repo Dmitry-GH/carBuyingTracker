@@ -3,16 +3,11 @@
  */
 
 import {Navigation} from 'react-native-navigation';
-import App from './App';
+import {googleAuthConfig} from './src/utils/auth';
+import {App} from './src/App';
 
-Navigation.registerComponent('carBuyingTracker', () => App);
+googleAuthConfig();
 
 Navigation.events().registerAppLaunchedListener(() => {
-  Navigation.setRoot({
-    root: {
-      component: {
-        name: 'carBuyingTracker',
-      },
-    },
-  });
+  App();
 });
