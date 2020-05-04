@@ -1,7 +1,6 @@
 interface UserInfo {
   userName: string;
-  accessToken: string;
-  idToken: string;
+  uid: string;
   pending: boolean;
   error: Error | null;
   isLoggedIn: boolean;
@@ -16,13 +15,12 @@ interface UserLoginAction {
 interface UserDataGoogle {
   user: {
     displayName: string;
+    uid: string;
   };
 }
 
 interface UserLoginActionSuccess {
   type: string;
-  accessToken: string;
-  idToken: string;
   userData: UserDataGoogle;
 }
 

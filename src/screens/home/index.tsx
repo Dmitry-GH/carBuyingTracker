@@ -2,15 +2,15 @@ import React, {useEffect, useCallback} from 'react';
 import {View, Text, Button} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import Navigation from '../../services/Navigation';
-import {userLogout} from '../../store/auth/actions';
+
 import {goToAuth} from '../navigation';
 import styles from './styles';
 
 const Home = ({componentId}: {componentId: string}): JSX.Element => {
   const dispatch = useDispatch();
-  const logoutUser = useCallback(() => dispatch(userLogout()), [dispatch]);
 
   const user = useSelector((s: GlobalState) => s.user);
+  const theme = useSelector((s: GlobalState) => s.theme);
 
   useEffect(() => {
     try {
@@ -32,9 +32,7 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
 
   return (
     <View style={styles.container}>
-      <Text>Hello from Home screen.</Text>
-
-      <Button onPress={logoutUser} title="Sign Out" />
+      <Text style={{color: theme.main_text}}>Hello from Home screen.</Text>
     </View>
   );
 };
