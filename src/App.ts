@@ -17,6 +17,7 @@ export const App = () => {
   Navigation.setRoot({
     root: {
       component: {
+        id: 'INITIALIZING',
         name: INITIALIZING,
       },
     },

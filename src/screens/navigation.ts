@@ -1,6 +1,39 @@
 import Navigation from '../services/Navigation';
-import {HOME, SIGNIN, SIGNUP, SETTINGS} from './index';
+import {HOME, HOME_EDIT, SIGNIN, SIGNUP, SETTINGS, MODAL} from './index';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+type ModalProps = {
+  title: string;
+  type: string;
+  data: FiltersResponse[];
+};
+
+export const openModal = (props: ModalProps) =>
+  Navigation.showModal({
+    stack: {
+      children: [
+        {
+          component: {
+            id: 'MODAL',
+            name: MODAL,
+            options: {
+              topBar: {
+                title: {
+                  fontSize: 30,
+                  text: props.title,
+                },
+              },
+            },
+            passProps: {
+              test: 'test',
+              type: props.type,
+              data: props.data,
+            },
+          },
+        },
+      ],
+    },
+  });
 
 export const goToAuth = () =>
   Promise.all([
@@ -98,6 +131,31 @@ export const goHome = () =>
                   },
                   bottomTab: {
                     text: 'HOME',
+                    icon: signInImg,
+                  },
+                },
+              },
+            },
+            {
+              stack: {
+                id: 'HOME_EDIT_TAB',
+                children: [
+                  {
+                    component: {
+                      id: 'HOME_EDIT',
+                      name: HOME_EDIT,
+                    },
+                  },
+                ],
+                options: {
+                  topBar: {
+                    title: {
+                      fontSize: 30,
+                      text: 'HOME EDIT',
+                    },
+                  },
+                  bottomTab: {
+                    text: 'HOME EDIT',
                     icon: signInImg,
                   },
                 },
