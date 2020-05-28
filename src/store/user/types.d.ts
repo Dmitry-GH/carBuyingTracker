@@ -4,6 +4,24 @@ interface UserInfo {
   pending: boolean;
   error: Error | null;
   isLoggedIn: boolean;
+  userCar: {
+    category: null | {
+      name: string;
+      value: number;
+    };
+    mark: null | {
+      name: string;
+      value: number;
+    };
+    model: null | {
+      name: string;
+      value: number;
+    };
+    year: null | {
+      name: string;
+      value: number;
+    };
+  };
 }
 
 type UserState = UserInfo;
@@ -33,11 +51,22 @@ interface UserLogoutAction {
   type: string;
 }
 
+interface UserCarSetAction {
+  type: string;
+  userCarData: {
+    type: string;
+    name: string;
+    value: number;
+  };
+}
+
 type UserActionTypes_U =
   | UserLoginAction
   | UserLoginActionFailure
-  | UserLoginActionSuccess; // Union Types
+  | UserLoginActionSuccess
+  | UserCarSetAction; // Union Types
 
 type UserActionTypes_I = UserLoginAction &
   UserLoginActionFailure &
-  UserLoginActionSuccess; // Intersection Types
+  UserLoginActionSuccess &
+  UserCarSetAction; // Intersection Types

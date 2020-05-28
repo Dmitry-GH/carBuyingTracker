@@ -2,7 +2,7 @@ import React, {useEffect, useCallback} from 'react';
 import {View, Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeAppTheme} from '../../store/theme/actions';
-import {userLogout} from '../../store/auth/actions';
+import {userLogout} from '../../store/user/actions';
 import {refreshAppTheme} from '../../services/Options';
 import {TouchableButton} from '../../components/buttons';
 import {goToAuth} from '../navigation';

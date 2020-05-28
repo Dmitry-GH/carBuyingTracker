@@ -6,6 +6,7 @@ export const USER_REGISTER_REQUEST = 'USER_REGISTER_REQUEST';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_LOGIN_REDIRECT_TO_REGISTER =
   'USER_LOGIN_REDIRECT_TO_REGISTER';
+export const USER_CAR_SET = 'USER_CAR_SET';
 
 export const userLoginRequest = (): UserLoginAction => ({
   type: USER_LOGIN_REQUEST,
@@ -33,4 +34,17 @@ export const userLoginFailure = (error: Error): UserLoginActionFailure => ({
 
 export const userLoginRedirectToRegister = (): UserLoginAction => ({
   type: USER_LOGIN_REDIRECT_TO_REGISTER,
+});
+
+export const userCarSet = (
+  type: string,
+  name: string,
+  value: number,
+): UserCarSetAction => ({
+  type: USER_CAR_SET,
+  userCarData: {
+    type,
+    name,
+    value,
+  },
 });

@@ -1,7 +1,7 @@
 import React, {useEffect, useCallback} from 'react';
 import {View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {userRegisterRequest} from '../../store/auth/actions';
+import {userRegisterRequest} from '../../store/user/actions';
 import {AuthButton} from '../../components/buttons';
 import {goHome} from '../navigation';
 import styles from './styles';

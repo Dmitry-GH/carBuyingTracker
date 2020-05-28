@@ -1,12 +1,12 @@
 import React, {useEffect, useCallback} from 'react';
 import {View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {userLoginRequest} from '../../store/auth/actions';
+import {userLoginRequest} from '../../store/user/actions';
 import {AuthButton} from '../../components/buttons';
 import {goHome} from '../navigation';
 import styles from './styles';
 
-const SignIn = ({componentId}: {componentId: string}): JSX.Element => {
+const SignIn = (): JSX.Element => {
   const dispatch = useDispatch();
   const fetchUser = useCallback(() => dispatch(userLoginRequest()), [dispatch]);
 
@@ -22,9 +22,6 @@ const SignIn = ({componentId}: {componentId: string}): JSX.Element => {
       console.log('error: ', err);
     }
   }, [user]);
-
-  console.log(componentId);
-  console.log(theme.currentTheme);
 
   return (
     <View style={styles.container}>
