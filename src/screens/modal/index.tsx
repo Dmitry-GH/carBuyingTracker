@@ -1,17 +1,15 @@
 import React, {useCallback} from 'react';
 import {SafeAreaView, FlatList} from 'react-native';
-import {TouchableButton} from '../../components/buttons';
 import {useSelector, useDispatch} from 'react-redux';
 import {userCarSet} from '../../store/user/actions';
 import Navigation from '../../services/Navigation';
+import {ListItem} from 'react-native-elements';
 import styles from './styles';
 
 const Modal = ({
-  data,
   type,
   componentId,
 }: {
-  data: FiltersResponse[];
   type: string;
   componentId: string;
 }): JSX.Element => {
@@ -23,26 +21,35 @@ const Modal = ({
   );
 
   const theme = useSelector((s: GlobalState) => s.theme);
+  const user = useSelector((s: GlobalState) => s.user);
+  const filters = useSelector((s: GlobalState) => s.filters);
 
   const _renderItem = ({item}: {item: FiltersResponse}) => (
-    <TouchableButton
+    <ListItem
+      bottomDivider
+      checkBox={{checked: item.value === user.userCar[type]?.value}}
+      containerStyle={{
+        backgroundColor: theme.main_background,
+      }}
       onPress={() => {
         setUserCar(type, item.name, item.value);
         Navigation.dismissModal(componentId);
       }}
-      theme={theme}
       title={item.name}
+      titleStyle={{color: theme.main_text}}
     />
   );
 
+  const _keyExtractor = (item: FiltersResponse) => `${item.value}`;
+
   return (
     <SafeAreaView style={styles.container}>
-      {!!data && data.length && (
+      {!!filters[type]?.length && (
         <FlatList
           contentContainerStyle={styles.container}
-          data={data}
+          data={filters[type]}
           initialNumToRender={25}
-          keyExtractor={item => `${item.value}`}
+          keyExtractor={_keyExtractor}
           renderItem={_renderItem}
           windowSize={30}
         />

@@ -5,6 +5,7 @@ interface UserInfo {
   error: Error | null;
   isLoggedIn: boolean;
   userCar: {
+    [index: string]: any;
     category: null | {
       name: string;
       value: number;

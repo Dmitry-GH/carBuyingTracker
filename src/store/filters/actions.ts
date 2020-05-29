@@ -4,6 +4,9 @@ export const CATEGORY_FAILURE = 'CATEGORY_FAILURE';
 export const MARK_REQUEST = 'MARK_REQUEST';
 export const MARK_SUCCESS = 'MARK_SUCCESS';
 export const MARK_FAILURE = 'MARK_FAILURE';
+export const MODEL_REQUEST = 'MODEL_REQUEST';
+export const MODEL_SUCCESS = 'MODEL_SUCCESS';
+export const MODEL_FAILURE = 'MODEL_FAILURE';
 
 export const getCategory = (): ActionRequest => ({
   type: CATEGORY_REQUEST,
@@ -32,5 +35,21 @@ export const getMarkSuccess = (mark: FiltersResponse[]): ActionSuccessMark => ({
 
 export const getMarkFailure = (error: Error): ActionFailure => ({
   type: MARK_FAILURE,
+  error,
+});
+
+export const getModel = (): ActionRequest => ({
+  type: MODEL_REQUEST,
+});
+
+export const getModelSuccess = (
+  model: FiltersResponse[],
+): ActionSuccessModel => ({
+  type: MODEL_SUCCESS,
+  model,
+});
+
+export const getModelFailure = (error: Error): ActionFailure => ({
+  type: MODEL_FAILURE,
   error,
 });

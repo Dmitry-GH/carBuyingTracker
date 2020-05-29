@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 type ModalProps = {
   title: string;
   type: string;
-  data: FiltersResponse[];
 };
 
 export const openModal = (props: ModalProps) =>
@@ -27,7 +26,6 @@ export const openModal = (props: ModalProps) =>
             passProps: {
               test: 'test',
               type: props.type,
-              data: props.data,
             },
           },
         },

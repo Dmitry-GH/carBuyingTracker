@@ -18,6 +18,7 @@ interface TouchableProps {
   onPress: (event: GestureResponderEvent) => void;
   onLongPress?: (event: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
+  disabled: boolean;
 }
 
 const Touchable =
@@ -34,6 +35,7 @@ const Touchable =
 interface TouchableButtonProps {
   title: string;
   theme: AppTheme;
+  disabled?: boolean;
   onPress: () => void;
   onLongPressed?: () => void;
   style?: object;
@@ -51,8 +53,10 @@ export const TouchableButton: React.FC<TouchableButtonProps> = ({
   title,
   onPress,
   theme,
+  disabled,
 }): JSX.Element => (
   <Touchable
+    disabled={disabled}
     onPress={() => onPress()}
     style={[styles.buttonContainer, {backgroundColor: theme.main_accent}]}>
     <View style={styles.button}>

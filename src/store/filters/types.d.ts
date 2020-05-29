@@ -1,7 +1,3 @@
-type FiltersTypes = {
-  [index: string]: FiltersResponse[];
-};
-
 interface FiltersResponse {
   name: string;
   value: number;
@@ -13,6 +9,7 @@ interface Filters {
   error: Error | null;
   category: FiltersResponse[];
   mark: FiltersResponse[];
+  model: FiltersResponse[];
 }
 
 type FiltersState = Filters;
@@ -31,6 +28,11 @@ interface ActionSuccessMark {
   mark: FiltersResponse[];
 }
 
+interface ActionSuccessModel {
+  type: string;
+  model: FiltersResponse[];
+}
+
 interface ActionFailure {
   type: string;
   error: Error | null;
@@ -40,9 +42,11 @@ type ActionTypes_U =
   | ActionRequest
   | ActionFailure
   | ActionSuccessCategory
-  | ActionSuccessMark; // Union Types
+  | ActionSuccessMark
+  | ActionSuccessModel; // Union Types
 
 type ActionTypes_I = ActionRequest &
   ActionFailure &
   ActionSuccessCategory &
-  ActionSuccessMark; // Intersection Types
+  ActionSuccessMark &
+  ActionSuccessModel; // Intersection Types

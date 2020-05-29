@@ -66,6 +66,8 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
                 name: action.userCarData.name,
                 value: action.userCarData.value,
               },
+              mark: null,
+              model: null,
             },
           };
         case 'mark':
@@ -77,6 +79,7 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
                 name: action.userCarData.name,
                 value: action.userCarData.value,
               },
+              model: null,
             },
           };
         case 'model':

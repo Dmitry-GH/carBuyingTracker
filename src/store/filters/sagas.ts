@@ -1,15 +1,17 @@
 import {call, put, takeLatest, select} from 'redux-saga/effects';
 import requestAPI from '../../configs/requestAPI';
-import {getCategoryFromStore} from './selectors';
-import database from '@react-native-firebase/database';
+import {getCategoryFromStore, getMarkFromStore} from './selectors';
 
 import {
   CATEGORY_REQUEST,
   MARK_REQUEST,
+  MODEL_REQUEST,
   getCategorySuccess,
-  getMarkSuccess,
   getCategoryFailure,
+  getMarkSuccess,
   getMarkFailure,
+  getModelSuccess,
+  getModelFailure,
 } from './actions';
 
 function fetchCategoryApi() {
@@ -18,6 +20,10 @@ function fetchCategoryApi() {
 
 function fetchMarkApi(categoryId: number) {
   return requestAPI(`/categories/${categoryId}/marks`);
+}
+
+function fetchModelApi(categoryId: number, markId: number) {
+  return requestAPI(`/categories/${categoryId}/marks/${markId}/models`);
 }
 
 function* fetchCategory() {
@@ -39,10 +45,25 @@ function* fetchMark() {
   }
 }
 
+function* fetchModel() {
+  try {
+    const category = yield select(getCategoryFromStore);
+    const mark = yield select(getMarkFromStore);
+    const model = yield call(() => fetchModelApi(category, mark));
+    yield put(getModelSuccess(model));
+  } catch (error) {
+    yield put(getModelFailure(error));
+  }
+}
+
 export function* watchFetchCategory() {
   yield takeLatest<ActionRequest>(CATEGORY_REQUEST, fetchCategory);
 }
 
 export function* watchFetchMark() {
   yield takeLatest<ActionRequest>(MARK_REQUEST, fetchMark);
+}
+
+export function* watchFetchModel() {
+  yield takeLatest<ActionRequest>(MODEL_REQUEST, fetchModel);
 }
