@@ -5,6 +5,10 @@ interface ObjectWithStringKey {
 }
 type ColorsType = ObjectWithStringKey;
 
+//
+//TODO: refactor color system
+//
+
 export const COLORS: ColorsType = {
   main_background: {
     dark: 'rgba(54, 64, 71, 1)',
@@ -41,6 +45,58 @@ export const COLORS: ColorsType = {
   error: {
     dark: 'rgba(152, 22, 29, 1)',
     light: 'rgba(152, 22, 29, 1)',
+  },
+  primary: {
+    dark: 'rgba(224, 97, 14, 1)',
+    light: 'rgba(31, 158, 241, 1)',
+  },
+  secondary: {
+    dark: '#8F0CE8',
+    light: '#8F0CE8',
+  },
+  grey0: {
+    dark: '#393e42',
+    light: '#393e42',
+  },
+  grey1: {
+    dark: '#43484d',
+    light: '#43484d',
+  },
+  grey2: {
+    dark: '#5e6977',
+    light: '#5e6977',
+  },
+  grey3: {
+    dark: '#86939e',
+    light: '#86939e',
+  },
+  grey4: {
+    dark: '#bdc6cf',
+    light: '#bdc6cf',
+  },
+  grey5: {
+    dark: '#e1e8ee',
+    light: '#e1e8ee',
+  },
+  greyOutline: {
+    dark: '#bbb',
+    light: '#bbb',
+  },
+  searchBg: {
+    dark: '#303337',
+    light: '#303337',
+  },
+  warning: {
+    dark: '#faad14',
+    light: '#faad14',
+  },
+  disabled: {
+    dark: 'hsl(208, 8%, 90%)',
+    light: 'hsl(208, 8%, 90%)',
+  },
+  divider: {
+    dark: 'rgba(229, 220, 212, 1)',
+    light: 'rgba(26, 35, 43, 1)',
   },
 };
 
