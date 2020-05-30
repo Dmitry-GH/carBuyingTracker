@@ -24,17 +24,22 @@ const Modal = ({
   const user = useSelector((s: GlobalState) => s.user);
   const filters = useSelector((s: GlobalState) => s.filters);
 
+  const selectItem = (item: FiltersResponse) => {
+    setUserCar(type, item.name, item.value);
+    Navigation.dismissModal(componentId);
+  };
+
   const _renderItem = ({item}: {item: FiltersResponse}) => (
     <ListItem
       bottomDivider
-      checkBox={{checked: item.value === user.userCar[type]?.value}}
+      checkBox={{
+        checked: item.value === user.userCar[type]?.value,
+        onIconPress: () => selectItem(item),
+      }}
       containerStyle={{
         backgroundColor: theme.main_background,
       }}
-      onPress={() => {
-        setUserCar(type, item.name, item.value);
-        Navigation.dismissModal(componentId);
-      }}
+      onPress={() => selectItem(item)}
       title={item.name}
       titleStyle={{color: theme.main_text}}
     />
