@@ -11,7 +11,7 @@ import styles from './styles';
 const Settings = (): JSX.Element => {
   const dispatch = useDispatch();
   const changeTheme = useCallback(
-    themeVariant => dispatch(changeAppTheme(themeVariant)),
+    (themeVariant: string) => dispatch(changeAppTheme(themeVariant)),
     [dispatch],
   );
   const logoutUser = useCallback(() => dispatch(userLogout()), [dispatch]);
@@ -31,19 +31,16 @@ const Settings = (): JSX.Element => {
 
   return (
     <View style={styles.container}>
-      <Text style={{color: theme.main_text}}>Hello from Settings screen.</Text>
-
       <TouchableButton
         onPress={() => {
           let themeVariant = theme.currentTheme === 'dark' ? 'light' : 'dark';
           changeTheme(themeVariant);
           refreshAppTheme();
         }}
-        theme={theme}
         title="Toggle Theme"
       />
 
-      <TouchableButton onPress={logoutUser} theme={theme} title="Sign Out" />
+      <TouchableButton onPress={logoutUser} title="Sign Out" />
     </View>
   );
 };

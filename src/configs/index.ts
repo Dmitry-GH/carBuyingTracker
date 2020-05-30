@@ -91,8 +91,8 @@ export const COLORS: ColorsType = {
     light: '#faad14',
   },
   disabled: {
-    dark: 'hsl(208, 8%, 90%)',
-    light: 'hsl(208, 8%, 90%)',
+    dark: 'rgba(96, 96, 96, 1)',
+    light: 'rgba(159, 159, 159, 1)',
   },
   divider: {
     dark: 'rgba(229, 220, 212, 1)',

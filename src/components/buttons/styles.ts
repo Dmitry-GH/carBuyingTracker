@@ -4,25 +4,18 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 0,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     marginVertical: 10,
   },
-  buttonText: {
-    fontSize: 28,
+  button: {
+    flex: 1,
+    paddingVertical: 15,
   },
   socialButton: {
     flex: 1,
     borderRadius: 5,
     width: '100%',
-  },
-  button: {
-    flex: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    paddingVertical: 5,
-    borderRadius: 5,
   },
 });
 
