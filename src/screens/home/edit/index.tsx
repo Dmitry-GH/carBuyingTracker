@@ -1,7 +1,8 @@
-import React, {useEffect, useCallback} from 'react';
-import {View, Text} from 'react-native';
+import React, {useCallback} from 'react';
+import {View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {TouchableButton} from '../../../components/buttons';
+import {Input} from 'react-native-elements';
 import {getCategory, getMark, getModel} from '../../../store/filters/actions';
 import {openModal} from '../../navigation';
 import styles from './styles';
@@ -48,21 +49,44 @@ const HomeEdit = (): JSX.Element => {
     <View style={styles.container}>
       <TouchableButton
         onPress={() => modal('category')}
-        theme={theme}
         title={user.userCar?.category?.name || 'Category'}
       />
       <TouchableButton
         disabled={!user.userCar?.category}
         onPress={() => modal('mark')}
-        theme={theme}
         title={user.userCar?.mark?.name || 'Mark'}
       />
       <TouchableButton
         disabled={!user.userCar?.mark}
         onPress={() => modal('model')}
-        theme={theme}
         title={user.userCar?.model?.name || 'Model'}
       />
+      <View style={styles.inputContainer}>
+        <View style={styles.inputBlock}>
+          <Input
+            containerStyle={styles.containerStyle_left}
+            inputContainerStyle={[
+              styles.inputContainerStyle,
+              {backgroundColor: theme.main_accent},
+            ]}
+            inputStyle={styles.input}
+            keyboardType={'number-pad'}
+            placeholder="Year from"
+          />
+        </View>
+        <View style={styles.inputBlock}>
+          <Input
+            containerStyle={styles.containerStyle_right}
+            inputContainerStyle={[
+              styles.inputContainerStyle,
+              {backgroundColor: theme.main_accent},
+            ]}
+            inputStyle={styles.input}
+            keyboardType={'number-pad'}
+            placeholder="Year to"
+          />
+        </View>
+      </View>
     </View>
   );
 };
