@@ -1,5 +1,5 @@
 import {CHANGE_THEME} from './actions';
-import {getTheme} from '../../configs';
+import getTheme from '../../configs/theme';
 
 const initialState: AppTheme = {
   ...getTheme(),

@@ -1,34 +1,48 @@
 import {StyleSheet} from 'react-native';
+import styled from 'styled-components/native';
+import {Input} from 'react-native-elements';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 5,
-  },
-  inputContainer: {
-    flex: 0,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 10,
-  },
+export const StyledInput = styled(Input).attrs((props) => ({
   inputContainerStyle: {
     borderRadius: 5,
+    borderBottomWidth: 0,
   },
+  inputStyle: {
+    borderRadius: 5,
+    paddingVertical: 15,
+    color: props.theme.grey5,
+    backgroundColor: props.theme.main_accent,
+  },
+  disabledInputStyle: {
+    backgroundColor: props.theme.disabled,
+  },
+  textAlign: 'center',
+}))``;
+
+export const StyledInputContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0;
+`;
+
+export const StyledInputBlock = styled.View`
+  flex: 1;
+`;
+
+export const StyledSaveButton = styled.View`
+  display: flex;
+  width: 47%;
+  justify-content: flex-end;
+  align-self: flex-end;
+`;
+
+const styles = StyleSheet.create({
   containerStyle_left: {
     paddingLeft: 0,
   },
   containerStyle_right: {
     paddingRight: 0,
-  },
-  input: {
-    color: 'white',
-    // textAlign: 'center',
-  },
-  inputBlock: {
-    flex: 1,
   },
 });
 

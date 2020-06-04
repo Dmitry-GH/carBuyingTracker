@@ -1,11 +1,15 @@
 import React, {useCallback} from 'react';
-import {View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {TouchableButton} from '../../../components/buttons';
-import {Input} from 'react-native-elements';
 import {getCategory, getMark, getModel} from '../../../store/filters/actions';
 import {openModal} from '../../navigation';
-import styles from './styles';
+import {StyledContainer} from '../../../configs/stylesGlobal';
+import styles, {
+  StyledInput,
+  StyledInputContainer,
+  StyledInputBlock,
+  StyledSaveButton,
+} from './styles';
 
 const HomeEdit = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -15,7 +19,6 @@ const HomeEdit = (): JSX.Element => {
   const fetchModel = useCallback(() => dispatch(getModel()), [dispatch]);
 
   const user = useSelector((s: GlobalState) => s.user);
-  const theme = useSelector((s: GlobalState) => s.theme);
   const filters = useSelector((s: GlobalState) => s.filters);
 
   const modal = (type: string) => {
@@ -46,7 +49,7 @@ const HomeEdit = (): JSX.Element => {
   };
 
   return (
-    <View style={styles.container}>
+    <StyledContainer>
       <TouchableButton
         onPress={() => modal('category')}
         title={user.userCar?.category?.name || 'Category'}
@@ -61,33 +64,33 @@ const HomeEdit = (): JSX.Element => {
         onPress={() => modal('model')}
         title={user.userCar?.model?.name || 'Model'}
       />
-      <View style={styles.inputContainer}>
-        <View style={styles.inputBlock}>
-          <Input
+      <StyledInputContainer>
+        <StyledInputBlock>
+          <StyledInput
             containerStyle={styles.containerStyle_left}
-            inputContainerStyle={[
-              styles.inputContainerStyle,
-              {backgroundColor: theme.main_accent},
-            ]}
-            inputStyle={styles.input}
+            disabled={!user.userCar?.model}
             keyboardType={'number-pad'}
             placeholder="Year from"
           />
-        </View>
-        <View style={styles.inputBlock}>
-          <Input
+        </StyledInputBlock>
+        <StyledInputBlock>
+          <StyledInput
             containerStyle={styles.containerStyle_right}
-            inputContainerStyle={[
-              styles.inputContainerStyle,
-              {backgroundColor: theme.main_accent},
-            ]}
-            inputStyle={styles.input}
+            disabled={!user.userCar?.model}
             keyboardType={'number-pad'}
             placeholder="Year to"
           />
-        </View>
-      </View>
-    </View>
+        </StyledInputBlock>
+      </StyledInputContainer>
+
+      <StyledSaveButton>
+        <TouchableButton
+          disabled={!user.userCar?.mark}
+          onPress={() => console.log('save')}
+          title={'Save'}
+        />
+      </StyledSaveButton>
+    </StyledContainer>
   );
 };
 

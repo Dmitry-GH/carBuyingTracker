@@ -13,7 +13,6 @@ const SignUp = (): JSX.Element => {
   ]);
 
   const user = useSelector((s: GlobalState) => s.user);
-  const theme = useSelector((s: GlobalState) => s.theme);
 
   useEffect(() => {
     try {
@@ -29,7 +28,6 @@ const SignUp = (): JSX.Element => {
     <View style={styles.container}>
       <AuthButton
         onPress={() => fetchNewUser()}
-        theme={theme}
         title="Sign up with Google"
         type="google"
       />

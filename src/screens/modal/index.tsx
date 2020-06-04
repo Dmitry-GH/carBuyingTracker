@@ -35,6 +35,7 @@ const Modal = ({
       checkBox={{
         checked: item.value === user.userCar[type]?.value,
         onIconPress: () => selectItem(item),
+        uncheckedColor: theme.main_text,
       }}
       containerStyle={{
         backgroundColor: theme.main_background,

@@ -1,9 +1,6 @@
-type AppTheme = {
-  [key: string]: string;
-};
+type AppTheme = ThemeType_I;
 
-interface ChangeAppTheme {
+type ChangeAppTheme = {
   type: string;
-  theme?: AppTheme;
   themeVariant: string;
-}
+};

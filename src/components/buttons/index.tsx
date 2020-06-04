@@ -5,7 +5,6 @@ import styles from './styles';
 
 interface TouchableButtonProps {
   title: string;
-  theme?: AppTheme;
   disabled?: boolean;
   onPress: () => void;
   onLongPressed?: () => void;
@@ -14,7 +13,6 @@ interface TouchableButtonProps {
 
 interface AuthButtonProps {
   title: string;
-  theme?: AppTheme;
   type: SocialMediaType;
   onPress: () => void;
   onLongPressed?: () => void;

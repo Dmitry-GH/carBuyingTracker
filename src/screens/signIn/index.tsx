@@ -11,7 +11,6 @@ const SignIn = (): JSX.Element => {
   const fetchUser = useCallback(() => dispatch(userLoginRequest()), [dispatch]);
 
   const user = useSelector((s: GlobalState) => s.user);
-  const theme = useSelector((s: GlobalState) => s.theme);
 
   useEffect(() => {
     try {
@@ -27,7 +26,6 @@ const SignIn = (): JSX.Element => {
     <View style={styles.container}>
       <AuthButton
         onPress={() => fetchUser()}
-        theme={theme}
         title="Sign in with Google"
         type="google"
       />
