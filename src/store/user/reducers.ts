@@ -6,6 +6,7 @@ import {
   USER_LOGOUT,
   USER_LOGIN_REDIRECT_TO_REGISTER,
   USER_CAR_SET,
+  USER_CAR_SET_YEAR,
 } from './actions';
 
 const initialState: UserState = {
@@ -15,7 +16,8 @@ const initialState: UserState = {
     category: null,
     mark: null,
     model: null,
-    year: null,
+    year_from: null,
+    year_to: null,
   },
   pending: false,
   error: null,
@@ -68,6 +70,8 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
               },
               mark: null,
               model: null,
+              year_from: null,
+              year_to: null,
             },
           };
         case 'mark':
@@ -80,6 +84,8 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
                 value: action.userCarData.value,
               },
               model: null,
+              year_from: null,
+              year_to: null,
             },
           };
         case 'model':
@@ -93,15 +99,28 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
               },
             },
           };
-        case 'year':
+        default:
+          return {
+            ...state,
+          };
+      }
+    }
+    case USER_CAR_SET_YEAR: {
+      switch (action.userCarData.type) {
+        case 'year_from':
           return {
             ...state,
             userCar: {
               ...state.userCar,
-              year: {
-                name: action.userCarData.name,
-                value: action.userCarData.value,
-              },
+              year_from: action.userCarData.value,
+            },
+          };
+        case 'year_to':
+          return {
+            ...state,
+            userCar: {
+              ...state.userCar,
+              year_to: action.userCarData.value,
             },
           };
         default:

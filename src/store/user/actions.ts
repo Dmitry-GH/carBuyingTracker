@@ -7,6 +7,7 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_LOGIN_REDIRECT_TO_REGISTER =
   'USER_LOGIN_REDIRECT_TO_REGISTER';
 export const USER_CAR_SET = 'USER_CAR_SET';
+export const USER_CAR_SET_YEAR = 'USER_CAR_SET_YEAR';
 
 export const userLoginRequest = (): UserLoginAction => ({
   type: USER_LOGIN_REQUEST,
@@ -45,6 +46,17 @@ export const userCarSet = (
   userCarData: {
     type,
     name,
+    value,
+  },
+});
+
+export const userCarSetYear = (
+  type: string,
+  value: string,
+): UserCarSetYearAction => ({
+  type: USER_CAR_SET_YEAR,
+  userCarData: {
+    type,
     value,
   },
 });

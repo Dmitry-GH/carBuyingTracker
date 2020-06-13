@@ -72,3 +72,6 @@ buck-out/
 
 # Signing keys
 /android/keystore.properties
+
+android/app/release
+android/app/debug

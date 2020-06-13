@@ -18,10 +18,8 @@ interface UserInfo {
       name: string;
       value: number;
     };
-    year: null | {
-      name: string;
-      value: number;
-    };
+    year_from: string | undefined | null;
+    year_to: string | undefined | null;
   };
 }
 
@@ -61,13 +59,23 @@ interface UserCarSetAction {
   };
 }
 
+interface UserCarSetYearAction {
+  type: string;
+  userCarData: {
+    type: string;
+    value: string;
+  };
+}
+
 type UserActionTypes_U =
   | UserLoginAction
   | UserLoginActionFailure
   | UserLoginActionSuccess
-  | UserCarSetAction; // Union Types
+  | UserCarSetAction
+  | UserCarSetYearAction; // Union Types
 
 type UserActionTypes_I = UserLoginAction &
   UserLoginActionFailure &
   UserLoginActionSuccess &
-  UserCarSetAction; // Intersection Types
+  UserCarSetAction &
+  UserCarSetYearAction; // Intersection Types

@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import Navigation from '../../services/Navigation';
 
 import {goToAuth} from '../navigation';
+import {StyledContainer} from '../../configs/stylesGlobal';
 import styles from './styles';
 
 const Home = ({componentId}: {componentId: string}): JSX.Element => {
@@ -16,6 +17,8 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
     try {
       if (!user.isLoggedIn) {
         goToAuth();
+      } else {
+        console.log(user.userCar);
       }
     } catch (err) {
       console.log('error: ', err);
@@ -31,9 +34,23 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
   });
 
   return (
-    <View style={styles.container}>
-      <Text style={{color: theme.main_text}}>Hello from Home screen.</Text>
-    </View>
+    <StyledContainer>
+      <Text style={{color: theme.main_text}}>
+        Category: {user.userCar.category?.name}
+      </Text>
+      <Text style={{color: theme.main_text}}>
+        Mark: {user.userCar.mark?.name}
+      </Text>
+      <Text style={{color: theme.main_text}}>
+        Model: {user.userCar.model?.name}
+      </Text>
+      <Text style={{color: theme.main_text}}>
+        Year from: {user.userCar.year_from}
+      </Text>
+      <Text style={{color: theme.main_text}}>
+        Year to: {user.userCar.year_to}
+      </Text>
+    </StyledContainer>
   );
 };
 
