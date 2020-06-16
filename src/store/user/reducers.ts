@@ -7,17 +7,23 @@ import {
   USER_LOGIN_REDIRECT_TO_REGISTER,
   USER_CAR_SET,
   USER_CAR_SET_YEAR,
+  USER_AVERAGE_PRICE_REQUEST,
+  USER_AVERAGE_PRICE_SUCCESS,
+  USER_AVERAGE_PRICE_FAILURE,
 } from './actions';
 
 const initialState: UserState = {
   userName: 'userName',
   uid: '',
   userCar: {
+    changed: false,
     category: null,
     mark: null,
     model: null,
     year_from: null,
     year_to: null,
+    average_price: null,
+    average_price_timestamp: Date.now(),
   },
   pending: false,
   error: null,
@@ -68,10 +74,13 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
                 name: action.userCarData.name,
                 value: action.userCarData.value,
               },
+              changed: true,
               mark: null,
               model: null,
               year_from: null,
               year_to: null,
+              average_price: null,
+              average_price_timestamp: null,
             },
           };
         case 'mark':
@@ -83,9 +92,12 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
                 name: action.userCarData.name,
                 value: action.userCarData.value,
               },
+              changed: true,
               model: null,
               year_from: null,
               year_to: null,
+              average_price: null,
+              average_price_timestamp: null,
             },
           };
         case 'model':
@@ -97,6 +109,9 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
                 name: action.userCarData.name,
                 value: action.userCarData.value,
               },
+              changed: true,
+              average_price: null,
+              average_price_timestamp: null,
             },
           };
         default:
@@ -113,6 +128,9 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
             userCar: {
               ...state.userCar,
               year_from: action.userCarData.value,
+              changed: true,
+              average_price: null,
+              average_price_timestamp: null,
             },
           };
         case 'year_to':
@@ -121,6 +139,9 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
             userCar: {
               ...state.userCar,
               year_to: action.userCarData.value,
+              changed: true,
+              average_price: null,
+              average_price_timestamp: null,
             },
           };
         default:
@@ -136,6 +157,38 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
     case USER_LOGOUT:
       return {
         ...initialState,
+      };
+
+    case USER_AVERAGE_PRICE_REQUEST:
+      return {
+        ...state,
+        pending: true,
+        error: null,
+        userCar: {
+          ...state.userCar,
+          average_price: null,
+        },
+      };
+    case USER_AVERAGE_PRICE_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        userCar: {
+          ...state.userCar,
+          average_price: action.averagePrice,
+          average_price_timestamp: Date.now(),
+          changed: false,
+        },
+      };
+    case USER_AVERAGE_PRICE_FAILURE:
+      return {
+        ...state,
+        pending: false,
+        error: action.error,
+        userCar: {
+          ...state.userCar,
+          average_price: null,
+        },
       };
     default:
       return state;

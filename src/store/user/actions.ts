@@ -9,12 +9,20 @@ export const USER_LOGIN_REDIRECT_TO_REGISTER =
 export const USER_CAR_SET = 'USER_CAR_SET';
 export const USER_CAR_SET_YEAR = 'USER_CAR_SET_YEAR';
 
+export const USER_AVERAGE_PRICE_REQUEST = 'USER_AVERAGE_PRICE_REQUEST';
+export const USER_AVERAGE_PRICE_SUCCESS = 'USER_AVERAGE_PRICE_SUCCESS';
+export const USER_AVERAGE_PRICE_FAILURE = 'USER_AVERAGE_PRICE_FAILURE';
+
 export const userLoginRequest = (): UserLoginAction => ({
   type: USER_LOGIN_REQUEST,
 });
 
 export const userRegisterRequest = (): UserLoginAction => ({
   type: USER_REGISTER_REQUEST,
+});
+
+export const getAveragePriceRequest = (): UserAveragePriceAction => ({
+  type: USER_AVERAGE_PRICE_REQUEST,
 });
 
 export const userLogout = (): UserLogoutAction => ({
@@ -35,6 +43,20 @@ export const userLoginFailure = (error: Error): UserLoginActionFailure => ({
 
 export const userLoginRedirectToRegister = (): UserLoginAction => ({
   type: USER_LOGIN_REDIRECT_TO_REGISTER,
+});
+
+export const getAveragePriceSuccess = (
+  averagePrice: UserAveragePrice,
+): UserAveragePriceActionSuccess => ({
+  type: USER_AVERAGE_PRICE_SUCCESS,
+  averagePrice,
+});
+
+export const getAveragePriceFailure = (
+  error: Error,
+): UserAveragePriceActionFailure => ({
+  type: USER_AVERAGE_PRICE_FAILURE,
+  error,
 });
 
 export const userCarSet = (

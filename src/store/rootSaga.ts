@@ -1,6 +1,11 @@
 import {all} from 'redux-saga/effects';
 
-import {fetchUserLogin, fetchUserRegister, userLogout} from './user/sagas';
+import {
+  fetchUserLogin,
+  fetchUserRegister,
+  userLogout,
+  userFetchAveragePrice,
+} from './user/sagas';
 import {
   watchFetchCategory,
   watchFetchMark,
@@ -12,6 +17,7 @@ export default function* rootSaga() {
     fetchUserLogin(),
     fetchUserRegister(),
     userLogout(),
+    userFetchAveragePrice(),
     watchFetchCategory(),
     watchFetchMark(),
     watchFetchModel(),
