@@ -16,6 +16,11 @@ export const StyledInput = styled(Input).attrs((props) => ({
   disabledInputStyle: {
     backgroundColor: props.theme.disabled,
   },
+  errorStyle: {
+    color: props.theme.error,
+    textAlign: 'center',
+    fontSize: 14,
+  },
   textAlign: 'center',
 }))``;
 
