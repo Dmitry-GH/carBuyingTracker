@@ -51,11 +51,16 @@ interface UserCar {
   };
   year_from: string | undefined | null;
   year_to: string | undefined | null;
+  isYearRange: boolean;
   average_price: null | UserAveragePrice;
   average_price_timestamp: null | number;
 }
 
 interface UserAveragePriceAction {
+  type: string;
+}
+
+interface IsYearRange {
   type: string;
 }
 

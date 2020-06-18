@@ -10,6 +10,7 @@ import {
   USER_AVERAGE_PRICE_REQUEST,
   USER_AVERAGE_PRICE_SUCCESS,
   USER_AVERAGE_PRICE_FAILURE,
+  USER_CAR_SET_YEAR_RANGE,
 } from './actions';
 
 const initialState: UserState = {
@@ -22,6 +23,7 @@ const initialState: UserState = {
     model: null,
     year_from: null,
     year_to: null,
+    isYearRange: false,
     average_price: null,
     average_price_timestamp: Date.now(),
   },
@@ -150,6 +152,18 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
           };
       }
     }
+    case USER_CAR_SET_YEAR_RANGE:
+      return {
+        ...state,
+        userCar: {
+          ...state.userCar,
+          isYearRange: !state.userCar.isYearRange,
+          year_to: state.userCar.isYearRange ? null : state.userCar.year_to,
+          changed: true,
+          average_price: null,
+          average_price_timestamp: null,
+        },
+      };
     case USER_LOGIN_REDIRECT_TO_REGISTER:
       return {
         ...initialState,

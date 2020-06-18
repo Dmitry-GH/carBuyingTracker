@@ -3,12 +3,16 @@ import {useSelector, useDispatch} from 'react-redux';
 import {TouchableButton} from '../../../components/buttons';
 import {getCategory, getMark, getModel} from '../../../store/filters/actions';
 import {openModal} from '../../navigation';
-import {userCarSetYear} from '../../../store/user/actions';
+import {userCarSetYear, setIsYearRange} from '../../../store/user/actions';
 import {StyledContainer} from '../../../configs/stylesGlobal';
-import styles, {
+import {
   StyledInput,
   StyledInputContainer,
   StyledInputBlock,
+  StyledInputHeaderContainer,
+  StyledInputHeader,
+  StyledSwitch,
+  StyledBlock,
 } from './styles';
 import moment from 'moment';
 
@@ -23,6 +27,9 @@ const HomeEdit = (): JSX.Element => {
   const fetchCategory = useCallback(() => dispatch(getCategory()), [dispatch]);
   const fetchMark = useCallback(() => dispatch(getMark()), [dispatch]);
   const fetchModel = useCallback(() => dispatch(getModel()), [dispatch]);
+  const setYearRange = useCallback(() => dispatch(setIsYearRange()), [
+    dispatch,
+  ]);
 
   const setUserCarYear = useCallback(
     (yearType: string, value: string) =>
@@ -33,14 +40,23 @@ const HomeEdit = (): JSX.Element => {
   const user = useSelector((s: GlobalState) => s.user);
   const filters = useSelector((s: GlobalState) => s.filters);
 
-  const [yearFrom, setYearFrom] = useState<string>('');
-  const [yearTo, setYearTo] = useState<string>('');
+  const [yearFrom, setYearFrom] = useState<string>(
+    user.userCar?.year_from || '',
+  );
+  const [yearTo, setYearTo] = useState<string>(user.userCar?.year_to || '');
   const [inputErrorYearFrom, setInputErrorYearFrom] = useState<YearInputError>(
     false,
   );
   const [inputErrorYearTo, setInputErrorYearTo] = useState<YearInputError>(
     false,
   );
+
+  const [isYearsRange, setisYearsRange] = useState(user.userCar?.isYearRange);
+  const toggleSwitch = () => {
+    setYearRange();
+    setYearTo('');
+    setisYearsRange((previousState) => !previousState);
+  };
 
   const setInputErrorChecker = (
     type: 'year_from' | 'year_to',
@@ -121,11 +137,17 @@ const HomeEdit = (): JSX.Element => {
         onPress={() => modal('model')}
         title={user.userCar?.model?.name || 'Model'}
       />
+      <StyledInputHeaderContainer>
+        <StyledBlock>
+          <StyledInputHeader>Year range</StyledInputHeader>
+        </StyledBlock>
+        <StyledBlock>
+          <StyledSwitch onValueChange={toggleSwitch} value={isYearsRange} />
+        </StyledBlock>
+      </StyledInputHeaderContainer>
       <StyledInputContainer>
         <StyledInputBlock>
           <StyledInput
-            containerStyle={styles.containerStyle_left}
-            defaultValue={user.userCar?.year_from ? user.userCar.year_from : ''}
             disabled={!user.userCar?.model}
             errorMessage={
               inputErrorYearFrom ? YearInputValidationErrorText : ''
@@ -137,29 +159,29 @@ const HomeEdit = (): JSX.Element => {
             onEndEditing={(e) => {
               validateYearInput(e.nativeEvent.text, 'year_from');
             }}
-            placeholder="Year from"
-            renderErrorMessage={inputErrorYearFrom}
+            placeholder={isYearsRange ? 'Year from' : 'Year'}
             value={yearFrom}
           />
         </StyledInputBlock>
-        <StyledInputBlock>
-          <StyledInput
-            containerStyle={styles.containerStyle_right}
-            defaultValue={user.userCar?.year_to ? user.userCar.year_to : ''}
-            disabled={!user.userCar?.model}
-            errorMessage={inputErrorYearTo ? YearInputValidationErrorText : ''}
-            keyboardType={'number-pad'}
-            onChangeText={(year) => {
-              handleYearInputChange(year, 'year_to');
-            }}
-            onEndEditing={(e) => {
-              validateYearInput(e.nativeEvent.text, 'year_to');
-            }}
-            placeholder="Year to"
-            renderErrorMessage={inputErrorYearTo}
-            value={yearTo}
-          />
-        </StyledInputBlock>
+        {isYearsRange && (
+          <StyledInputBlock>
+            <StyledInput
+              disabled={!user.userCar?.model}
+              errorMessage={
+                inputErrorYearTo ? YearInputValidationErrorText : ''
+              }
+              keyboardType={'number-pad'}
+              onChangeText={(year) => {
+                handleYearInputChange(year, 'year_to');
+              }}
+              onEndEditing={(e) => {
+                validateYearInput(e.nativeEvent.text, 'year_to');
+              }}
+              placeholder={'Year to'}
+              value={yearTo}
+            />
+          </StyledInputBlock>
+        )}
       </StyledInputContainer>
     </StyledContainer>
   );

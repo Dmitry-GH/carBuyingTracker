@@ -23,6 +23,10 @@ export const COLORS: ColorsType_I = {
     dark: 'rgba(186, 186, 186, 1)',
     light: 'rgba(69, 69, 69, 1)',
   },
+  main_text_contrast: {
+    dark: 'rgba(229, 220, 212, 1)',
+    light: 'rgba(26, 35, 43, 1)',
+  },
   info: {
     dark: 'rgba(96, 106, 125, 1)',
     light: 'rgba(96, 106, 125, 1)',
