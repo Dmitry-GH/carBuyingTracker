@@ -11,11 +11,13 @@ import {
   USER_AVERAGE_PRICE_SUCCESS,
   USER_AVERAGE_PRICE_FAILURE,
   USER_CAR_SET_YEAR_RANGE,
+  USER_SET_COLLECTED_MONEY,
 } from './actions';
 
 const initialState: UserState = {
   userName: 'userName',
   uid: '',
+  collectedMoney: 0,
   userCar: {
     changed: false,
     category: null,
@@ -204,6 +206,12 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
           average_price: null,
         },
       };
+    case USER_SET_COLLECTED_MONEY:
+      return {
+        ...state,
+        collectedMoney: action.collectedMoney,
+      };
+
     default:
       return state;
   }

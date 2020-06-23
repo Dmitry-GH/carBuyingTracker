@@ -1,17 +1,17 @@
 import React, {useCallback, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {TouchableButton} from '../../../components/buttons';
+import {Input} from '../../../components/input';
+import {Switch} from '../../../components/switch';
 import {getCategory, getMark, getModel} from '../../../store/filters/actions';
 import {openModal} from '../../navigation';
 import {userCarSetYear, setIsYearRange} from '../../../store/user/actions';
 import {StyledContainer} from '../../../configs/stylesGlobal';
 import {
-  StyledInput,
   StyledInputContainer,
   StyledInputBlock,
   StyledInputHeaderContainer,
   StyledInputHeader,
-  StyledSwitch,
   StyledBlock,
 } from './styles';
 import moment from 'moment';
@@ -52,6 +52,7 @@ const HomeEdit = (): JSX.Element => {
   );
 
   const [isYearsRange, setisYearsRange] = useState(user.userCar?.isYearRange);
+
   const toggleSwitch = () => {
     setYearRange();
     setYearTo('');
@@ -142,12 +143,12 @@ const HomeEdit = (): JSX.Element => {
           <StyledInputHeader>Year range</StyledInputHeader>
         </StyledBlock>
         <StyledBlock>
-          <StyledSwitch onValueChange={toggleSwitch} value={isYearsRange} />
+          <Switch onValueChange={toggleSwitch} value={isYearsRange} />
         </StyledBlock>
       </StyledInputHeaderContainer>
       <StyledInputContainer>
         <StyledInputBlock>
-          <StyledInput
+          <Input
             disabled={!user.userCar?.model}
             errorMessage={
               inputErrorYearFrom ? YearInputValidationErrorText : ''
@@ -165,7 +166,7 @@ const HomeEdit = (): JSX.Element => {
         </StyledInputBlock>
         {isYearsRange && (
           <StyledInputBlock>
-            <StyledInput
+            <Input
               disabled={!user.userCar?.model}
               errorMessage={
                 inputErrorYearTo ? YearInputValidationErrorText : ''

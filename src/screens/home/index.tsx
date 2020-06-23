@@ -1,10 +1,15 @@
-import React, {useEffect, useCallback} from 'react';
-import {Text} from 'react-native';
+import React, {useEffect, useState, useCallback} from 'react';
+import {View, Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import Navigation from '../../services/Navigation';
-import {getAveragePriceRequest} from '../../store/user/actions';
+import {
+  getAveragePriceRequest,
+  userSetCollectedMoney,
+} from '../../store/user/actions';
+import {Input} from '../../components/input';
 import {goToAuth} from '../navigation';
 import {StyledContainer} from '../../configs/stylesGlobal';
+import ProgressBar from '../../components/progressBar';
 import moment from 'moment';
 
 const Home = ({componentId}: {componentId: string}): JSX.Element => {
@@ -13,9 +18,25 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
     () => dispatch(getAveragePriceRequest()),
     [dispatch],
   );
+  const setCollectedMoney = useCallback(
+    (collectedMoney: number) => dispatch(userSetCollectedMoney(collectedMoney)),
+    [dispatch],
+  );
 
   const user = useSelector((s: GlobalState) => s.user);
   const theme = useSelector((s: GlobalState) => s.theme);
+
+  const [collectedMoney_local, setCollectedMoney_local] = useState<string>(
+    `${user.collectedMoney}`,
+  );
+
+  const interQuartileMean =
+    user.userCar.average_price &&
+    Math.round(user.userCar.average_price?.interQuartileMean);
+
+  const arithmeticMean =
+    user.userCar.average_price &&
+    Math.round(user.userCar.average_price?.arithmeticMean);
 
   const getTimestampDiff = useCallback(() => {
     let savedTimestamp = user.userCar.average_price_timestamp;
@@ -83,15 +104,30 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
         Year to: {user.userCar.year_to}
       </Text>
 
+      <View style={{alignSelf: 'stretch'}}>
+        <ProgressBar
+          finalProgress={interQuartileMean || 0}
+          progress={user.collectedMoney}
+        />
+        <Input
+          keyboardType={'number-pad'}
+          onChangeText={(collectedMoney) => {
+            setCollectedMoney_local(collectedMoney);
+          }}
+          onEndEditing={(e) => {
+            setCollectedMoney(+e.nativeEvent.text);
+          }}
+          value={`${collectedMoney_local}`}
+        />
+      </View>
+
       {user.userCar.average_price?.total ? (
         <>
           <Text style={{color: theme.main_text}}>
-            arithmeticMean: $
-            {Math.round(user.userCar.average_price?.arithmeticMean)}
+            arithmeticMean: ${arithmeticMean}
           </Text>
           <Text style={{color: theme.main_text}}>
-            interQuartileMean: $
-            {Math.round(user.userCar.average_price?.interQuartileMean)}
+            interQuartileMean: ${interQuartileMean}
           </Text>
 
           <Text style={{color: theme.main_text}}>

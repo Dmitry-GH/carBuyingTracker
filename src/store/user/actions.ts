@@ -6,6 +6,7 @@ export const USER_REGISTER_REQUEST = 'USER_REGISTER_REQUEST';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_LOGIN_REDIRECT_TO_REGISTER =
   'USER_LOGIN_REDIRECT_TO_REGISTER';
+
 export const USER_CAR_SET = 'USER_CAR_SET';
 export const USER_CAR_SET_YEAR = 'USER_CAR_SET_YEAR';
 export const USER_CAR_SET_YEAR_RANGE = 'USER_CAR_SET_YEAR_RANGE';
@@ -13,6 +14,8 @@ export const USER_CAR_SET_YEAR_RANGE = 'USER_CAR_SET_YEAR_RANGE';
 export const USER_AVERAGE_PRICE_REQUEST = 'USER_AVERAGE_PRICE_REQUEST';
 export const USER_AVERAGE_PRICE_SUCCESS = 'USER_AVERAGE_PRICE_SUCCESS';
 export const USER_AVERAGE_PRICE_FAILURE = 'USER_AVERAGE_PRICE_FAILURE';
+
+export const USER_SET_COLLECTED_MONEY = 'USER_SET_COLLECTED_MONEY';
 
 export const userLoginRequest = (): UserLoginAction => ({
   type: USER_LOGIN_REQUEST,
@@ -86,4 +89,11 @@ export const userCarSetYear = (
     type,
     value,
   },
+});
+
+export const userSetCollectedMoney = (
+  collectedMoney: number,
+): UserSetCollectedMoney => ({
+  type: USER_SET_COLLECTED_MONEY,
+  collectedMoney,
 });

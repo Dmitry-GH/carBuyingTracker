@@ -5,6 +5,7 @@ interface UserInfo {
   error: Error | null;
   isLoggedIn: boolean;
   userCar: UserCar;
+  collectedMoney: number;
 }
 
 type UserState = UserInfo;
@@ -108,6 +109,11 @@ interface UserCarSetYearAction {
   };
 }
 
+interface UserSetCollectedMoney {
+  type: string;
+  collectedMoney: number;
+}
+
 type UserActionTypes_U =
   | UserLoginAction
   | UserLoginActionFailure
@@ -116,7 +122,8 @@ type UserActionTypes_U =
   | UserCarSetYearAction
   | UserAveragePriceAction
   | UserAveragePriceActionSuccess
-  | UserAveragePriceActionFailure; // Union Types
+  | UserAveragePriceActionFailure
+  | UserSetCollectedMoney; // Union Types
 
 type UserActionTypes_I = UserLoginAction &
   UserLoginActionFailure &
@@ -125,4 +132,5 @@ type UserActionTypes_I = UserLoginAction &
   UserCarSetYearAction &
   UserAveragePriceAction &
   UserAveragePriceActionSuccess &
-  UserAveragePriceActionFailure; // Intersection Types
+  UserAveragePriceActionFailure &
+  UserSetCollectedMoney; // Intersection Types
