@@ -1,11 +1,14 @@
-import {StyleSheet} from 'react-native';
+import styled from 'styled-components/native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-  },
-});
+export const StyledHomeProgressContainer = styled.View`
+  align-self: stretch;
+`;
 
-export default styles;
+export const StyledText = styled.Text`
+  color: ${(props) => props.theme.main_text_contrast};
+  font-size: 20px;
+  text-align-vertical: center;
+  display: flex;
+  flex: 1 1 0;
+  align-self: center;
+`;

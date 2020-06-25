@@ -41,7 +41,7 @@ const dismissModal = (selfOrCompId: string | object) =>
 
 const dismissAllModals = () => Navigation.dismissAllModals();
 
-const showOverlay = (name: string | object, options: object) =>
+const showOverlay = (name: string | object, options?: object) =>
   Navigation.showOverlay(component(name, options));
 
 const dismissOverlay = (name: string) => Navigation.dismissOverlay(name);

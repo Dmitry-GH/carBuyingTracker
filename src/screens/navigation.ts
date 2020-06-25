@@ -1,11 +1,39 @@
 import Navigation from '../services/Navigation';
-import {HOME, HOME_EDIT, SIGNIN, SIGNUP, SETTINGS, MODAL} from './index';
+import {
+  HOME,
+  HOME_EDIT,
+  SIGNIN,
+  SIGNUP,
+  SETTINGS,
+  MODAL,
+  OVERLAY,
+} from './index';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type ModalProps = {
   title: string;
   type: string;
 };
+
+export const openOverlay = (props: OverlayComponentProps) =>
+  Navigation.showOverlay({
+    component: {
+      id: 'OVERLAY',
+      name: OVERLAY,
+      options: {
+        layout: {
+          componentBackgroundColor: 'transparent',
+        },
+        overlay: {
+          interceptTouchOutside: true,
+        },
+      },
+      passProps: {
+        title: props.title,
+        message: props.message,
+      },
+    },
+  });
 
 export const openModal = (props: ModalProps) =>
   Navigation.showModal({

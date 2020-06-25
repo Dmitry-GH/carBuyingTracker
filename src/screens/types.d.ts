@@ -17,6 +17,12 @@ type SignInComponentType = NavigationComponent<SignInComponentProps>;
 interface SignUpComponentProps {}
 type SignUpComponentType = NavigationComponent<SignUpComponentProps>;
 
+interface OverlayComponentProps {
+  title: string;
+  message: string;
+}
+type OverlayComponentType = NavigationComponent<OverlayComponentProps>;
+
 interface InitialisingComponentProps {}
 type InitialisingComponentType = NavigationComponent<
   InitialisingComponentProps

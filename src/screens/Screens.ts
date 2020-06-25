@@ -6,6 +6,7 @@ import {
   SIGNUP,
   SETTINGS,
   MODAL,
+  OVERLAY,
 } from './index';
 import Initializing from './init';
 import Home from './home';
@@ -14,6 +15,7 @@ import SignIn from './signIn';
 import SignUp from './signUp';
 import Settings from './settings';
 import Modal from './modal';
+import Overlay from './overlay';
 
 const Screens = new Map<string, React.FC<any>>();
 
@@ -24,5 +26,6 @@ Screens.set(HOME, Home);
 Screens.set(HOME_EDIT, HomeEdit);
 Screens.set(SETTINGS, Settings);
 Screens.set(MODAL, Modal);
+Screens.set(OVERLAY, Overlay);
 
 export default Screens;

@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import Navigation from '../../services/Navigation';
 import {
@@ -7,8 +7,15 @@ import {
   userSetCollectedMoney,
 } from '../../store/user/actions';
 import {Input} from '../../components/input';
-import {goToAuth} from '../navigation';
-import {StyledContainer} from '../../configs/stylesGlobal';
+import {TouchableButton} from '../../components/buttons';
+
+import {goToAuth, openOverlay} from '../navigation';
+import {
+  StyledContainer,
+  StyledBlock,
+  StyledInputContainer,
+} from '../../configs/stylesGlobal';
+import {StyledHomeProgressContainer, StyledText} from './styles';
 import ProgressBar from '../../components/progressBar';
 import moment from 'moment';
 
@@ -104,31 +111,49 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
         Year to: {user.userCar.year_to}
       </Text>
 
-      <View style={{alignSelf: 'stretch'}}>
-        <ProgressBar
-          finalProgress={interQuartileMean || 0}
-          progress={user.collectedMoney}
-        />
-        <Input
-          keyboardType={'number-pad'}
-          onChangeText={(collectedMoney) => {
-            setCollectedMoney_local(collectedMoney);
-          }}
-          onEndEditing={(e) => {
-            setCollectedMoney(+e.nativeEvent.text);
-          }}
-          value={`${collectedMoney_local}`}
-        />
-      </View>
-
       {user.userCar.average_price?.total ? (
         <>
-          <Text style={{color: theme.main_text}}>
-            arithmeticMean: ${arithmeticMean}
-          </Text>
-          <Text style={{color: theme.main_text}}>
-            interQuartileMean: ${interQuartileMean}
-          </Text>
+          <StyledHomeProgressContainer>
+            <ProgressBar
+              backgroundColor={theme.primary || 'rgba(224, 97, 14, 1)'}
+              finalProgress={interQuartileMean || 0}
+              progress={user.collectedMoney}
+            />
+            <StyledInputContainer>
+              <StyledBlock>
+                <Input
+                  keyboardType={'number-pad'}
+                  onChangeText={(collectedMoney) => {
+                    setCollectedMoney_local(collectedMoney);
+                  }}
+                  onEndEditing={(e) => {
+                    setCollectedMoney(+e.nativeEvent.text);
+                  }}
+                  value={`${collectedMoney_local}`}
+                />
+              </StyledBlock>
+              <StyledBlock>
+                <StyledText>collected of</StyledText>
+              </StyledBlock>
+              <StyledBlock>
+                <TouchableButton
+                  onPress={() =>
+                    openOverlay({
+                      title: 'Select avarage price type',
+                      message: 'test',
+                    })
+                  }
+                  title="2000"
+                />
+                {/* <Text style={{color: theme.main_text}}>
+                  arithmeticMean: ${arithmeticMean}
+                </Text>
+                <Text style={{color: theme.main_text}}>
+                  interQuartileMean: ${interQuartileMean}
+                </Text> */}
+              </StyledBlock>
+            </StyledInputContainer>
+          </StyledHomeProgressContainer>
 
           <Text style={{color: theme.main_text}}>
             total: {user.userCar.average_price?.total}
