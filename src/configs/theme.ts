@@ -7,6 +7,10 @@ export const COLORS: ColorsType_I = {
     dark: 'rgba(26, 35, 43, 1)',
     light: 'rgba(229, 220, 212, 1)',
   },
+  second_background_transparent: {
+    dark: 'rgba(26, 35, 43, 0.7)',
+    light: 'rgba(229, 220, 212, 0.7)',
+  },
   main_highlight: {
     dark: 'rgba(96, 96, 96, 1)',
     light: 'rgba(159, 159, 159, 1)',
@@ -26,6 +30,10 @@ export const COLORS: ColorsType_I = {
   main_text_contrast: {
     dark: 'rgba(229, 220, 212, 1)',
     light: 'rgba(26, 35, 43, 1)',
+  },
+  main_text_white: {
+    dark: 'rgba(255, 255, 255, 1)',
+    light: 'rgba(255, 255, 255, 1)',
   },
   info: {
     dark: 'rgba(96, 106, 125, 1)',

@@ -6,14 +6,15 @@ import {Switch} from '../../../components/switch';
 import {getCategory, getMark, getModel} from '../../../store/filters/actions';
 import {openModal} from '../../navigation';
 import {userCarSetYear, setIsYearRange} from '../../../store/user/actions';
-import {StyledContainer} from '../../../configs/stylesGlobal';
 import {
-  StyledInputContainer,
-  StyledInputBlock,
-  StyledInputHeaderContainer,
-  StyledInputHeader,
+  StyledContainer,
   StyledBlock,
-} from './styles';
+  StyledInputContainer,
+  StyledButtonsList,
+  Flex1,
+  Flex3,
+} from '../../../configs/stylesGlobal';
+import {StyledInputHeaderContainer, StyledInputHeader} from './styles';
 import moment from 'moment';
 
 type YearInputError = boolean;
@@ -124,66 +125,72 @@ const HomeEdit = (): JSX.Element => {
 
   return (
     <StyledContainer>
-      <TouchableButton
-        onPress={() => modal('category')}
-        title={user.userCar?.category?.name || 'Category'}
-      />
-      <TouchableButton
-        disabled={!user.userCar?.category}
-        onPress={() => modal('mark')}
-        title={user.userCar?.mark?.name || 'Mark'}
-      />
-      <TouchableButton
-        disabled={!user.userCar?.mark}
-        onPress={() => modal('model')}
-        title={user.userCar?.model?.name || 'Model'}
-      />
-      <StyledInputHeaderContainer>
-        <StyledBlock>
-          <StyledInputHeader>Year range</StyledInputHeader>
-        </StyledBlock>
-        <StyledBlock>
-          <Switch onValueChange={toggleSwitch} value={isYearsRange} />
-        </StyledBlock>
-      </StyledInputHeaderContainer>
-      <StyledInputContainer>
-        <StyledInputBlock>
-          <Input
-            disabled={!user.userCar?.model}
-            errorMessage={
-              inputErrorYearFrom ? YearInputValidationErrorText : ''
-            }
-            keyboardType={'number-pad'}
-            onChangeText={(year) => {
-              handleYearInputChange(year, 'year_from');
-            }}
-            onEndEditing={(e) => {
-              validateYearInput(e.nativeEvent.text, 'year_from');
-            }}
-            placeholder={isYearsRange ? 'Year from' : 'Year'}
-            value={yearFrom}
+      <Flex1 />
+      <Flex3>
+        <StyledButtonsList>
+          <TouchableButton
+            onPress={() => modal('category')}
+            title={user.userCar?.category?.name || 'Category'}
           />
-        </StyledInputBlock>
-        {isYearsRange && (
-          <StyledInputBlock>
+          <TouchableButton
+            disabled={!user.userCar?.category}
+            onPress={() => modal('mark')}
+            title={user.userCar?.mark?.name || 'Mark'}
+          />
+          <TouchableButton
+            disabled={!user.userCar?.mark}
+            onPress={() => modal('model')}
+            title={user.userCar?.model?.name || 'Model'}
+          />
+        </StyledButtonsList>
+        <StyledInputHeaderContainer>
+          <StyledBlock>
+            <StyledInputHeader>Year range</StyledInputHeader>
+          </StyledBlock>
+          <StyledBlock>
+            <Switch onValueChange={toggleSwitch} value={isYearsRange} />
+          </StyledBlock>
+        </StyledInputHeaderContainer>
+        <StyledInputContainer>
+          <StyledBlock>
             <Input
               disabled={!user.userCar?.model}
               errorMessage={
-                inputErrorYearTo ? YearInputValidationErrorText : ''
+                inputErrorYearFrom ? YearInputValidationErrorText : ''
               }
               keyboardType={'number-pad'}
               onChangeText={(year) => {
-                handleYearInputChange(year, 'year_to');
+                handleYearInputChange(year, 'year_from');
               }}
               onEndEditing={(e) => {
-                validateYearInput(e.nativeEvent.text, 'year_to');
+                validateYearInput(e.nativeEvent.text, 'year_from');
               }}
-              placeholder={'Year to'}
-              value={yearTo}
+              placeholder={isYearsRange ? 'Year from' : 'Year'}
+              value={yearFrom}
             />
-          </StyledInputBlock>
-        )}
-      </StyledInputContainer>
+          </StyledBlock>
+          {isYearsRange && (
+            <StyledBlock>
+              <Input
+                disabled={!user.userCar?.model}
+                errorMessage={
+                  inputErrorYearTo ? YearInputValidationErrorText : ''
+                }
+                keyboardType={'number-pad'}
+                onChangeText={(year) => {
+                  handleYearInputChange(year, 'year_to');
+                }}
+                onEndEditing={(e) => {
+                  validateYearInput(e.nativeEvent.text, 'year_to');
+                }}
+                placeholder={'Year to'}
+                value={yearTo}
+              />
+            </StyledBlock>
+          )}
+        </StyledInputContainer>
+      </Flex3>
+      <Flex1 />
     </StyledContainer>
   );
 };

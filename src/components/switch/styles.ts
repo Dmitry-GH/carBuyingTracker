@@ -6,7 +6,7 @@ export const StyledSwitch = styled(Switch).attrs((props) => ({
   thumbColor: props.value ? props.theme.primary : props.theme.grey5,
   trackColor: {false: props.theme.grey3, true: props.theme.main_highlight},
 }))`
-  align-self: center;
+  align-self: flex-end;
   height: 40px;
   transform: scale(1.5);
 `;

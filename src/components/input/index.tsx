@@ -21,6 +21,7 @@ export const Input: React.FC<InputType> = ({
     onChangeText={onChangeText}
     onEndEditing={onEndEditing}
     placeholder={placeholder}
+    renderErrorMessage={!!errorMessage}
     value={value}
   />
 );

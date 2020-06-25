@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {BORDER_RADIUS} from '../../configs';
 
 const styles = StyleSheet.create({
   buttonContainer: {
@@ -6,15 +7,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    marginVertical: 10,
+    marginHorizontal: 9,
   },
   button: {
     flex: 1,
     paddingVertical: 15,
   },
+  titleStyle: {
+    fontSize: 18,
+  },
   socialButton: {
     flex: 1,
-    borderRadius: 5,
+    borderRadius: BORDER_RADIUS,
     width: '100%',
   },
 });

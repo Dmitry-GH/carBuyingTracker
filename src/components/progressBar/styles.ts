@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {BORDER_RADIUS} from '../../configs';
 
 export const StyledProgressBarContainer = styled.View`
   display: flex;
@@ -18,5 +19,11 @@ export const StyledProgressBar = styled.View`
   background-color: ${(props) => props.theme.second_background};
   border-color: ${(props) => props.theme.primary};
   border-width: 2px;
-  border-radius: 5px;
+  border-radius: ${BORDER_RADIUS}px;
+`;
+
+export const StyledProgressBarText = styled.Text`
+  color: ${(props) => props.theme.main_text};
+  font-size: 20px;
+  font-weight: bold;
 `;

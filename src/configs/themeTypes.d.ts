@@ -21,6 +21,7 @@ interface Colors {
   second_highlight: ColorsObject;
   main_accent: ColorsObject;
   main_text: ColorsObject;
+  main_text_white: ColorsObject;
   info: ColorsObject;
   success: ColorsObject;
   error: ColorsObject;
@@ -50,6 +51,7 @@ interface ThemeColors {
   second_highlight?: string;
   main_accent?: string;
   main_text?: string;
+  main_text_white?: string;
   info?: string;
   success?: string;
   error?: string;

@@ -29,6 +29,7 @@ export const TouchableButton: React.FC<TouchableButtonProps> = ({
     disabled={disabled}
     onPress={() => onPress()}
     title={title}
+    titleStyle={styles.titleStyle}
   />
 );
 

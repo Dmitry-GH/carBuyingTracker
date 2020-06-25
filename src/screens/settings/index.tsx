@@ -1,12 +1,11 @@
 import React, {useEffect, useCallback} from 'react';
-import {View, Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeAppTheme} from '../../store/theme/actions';
 import {userLogout} from '../../store/user/actions';
 import {refreshAppTheme} from '../../services/Options';
 import {TouchableButton} from '../../components/buttons';
 import {goToAuth} from '../navigation';
-import styles from './styles';
+import {StyledButtonsList, Flex2} from '../../configs/stylesGlobal';
 
 const Settings = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -25,23 +24,27 @@ const Settings = (): JSX.Element => {
         goToAuth();
       }
     } catch (err) {
-      console.log('error: ', err);
+      console.error('error: ', err);
     }
   }, [user]);
 
   return (
-    <View style={styles.container}>
-      <TouchableButton
-        onPress={() => {
-          let themeVariant = theme.currentTheme === 'dark' ? 'light' : 'dark';
-          changeTheme(themeVariant);
-          refreshAppTheme();
-        }}
-        title="Toggle Theme"
-      />
+    <>
+      <Flex2 />
+      <StyledButtonsList>
+        <TouchableButton
+          onPress={() => {
+            let themeVariant = theme.currentTheme === 'dark' ? 'light' : 'dark';
+            changeTheme(themeVariant);
+            refreshAppTheme();
+          }}
+          title="Toggle Theme"
+        />
 
-      <TouchableButton onPress={logoutUser} title="Sign Out" />
-    </View>
+        <TouchableButton onPress={logoutUser} title="Sign Out" />
+      </StyledButtonsList>
+      <Flex2 />
+    </>
   );
 };
 
