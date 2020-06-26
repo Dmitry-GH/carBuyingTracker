@@ -17,27 +17,27 @@ interface ColorsObject {
 interface Colors {
   main_background: ColorsObject;
   second_background: ColorsObject;
-  main_highlight: ColorsObject;
-  second_highlight: ColorsObject;
-  main_accent: ColorsObject;
+  second_background_transparent: ColorsObject;
   main_text: ColorsObject;
+  main_text_contrast: ColorsObject;
   main_text_white: ColorsObject;
+  primary: ColorsObject;
+  primary_dark: ColorsObject;
+  secondary: ColorsObject;
   info: ColorsObject;
   success: ColorsObject;
   error: ColorsObject;
-  primary: ColorsObject;
-  secondary: ColorsObject;
+  warning: ColorsObject;
+  disabled: ColorsObject;
+  divider: ColorsObject;
+  greyOutline: ColorsObject;
+  searchBg: ColorsObject;
   grey0: ColorsObject;
   grey1: ColorsObject;
   grey2: ColorsObject;
   grey3: ColorsObject;
   grey4: ColorsObject;
   grey5: ColorsObject;
-  greyOutline: ColorsObject;
-  searchBg: ColorsObject;
-  warning: ColorsObject;
-  disabled: ColorsObject;
-  divider: ColorsObject;
 }
 
 /**************************************************************
@@ -47,27 +47,27 @@ interface Colors {
 interface ThemeColors {
   main_background?: string;
   second_background?: string;
-  main_highlight?: string;
-  second_highlight?: string;
-  main_accent?: string;
+  second_background_transparent?: string;
   main_text?: string;
+  main_text_contrast?: string;
   main_text_white?: string;
+  primary?: string;
+  primary_dark?: string;
+  secondary?: string;
   info?: string;
   success?: string;
   error?: string;
-  primary?: string;
-  secondary?: string;
+  warning?: string;
+  disabled?: string;
+  divider?: string;
+  greyOutline?: string;
+  searchBg?: string;
   grey0?: string;
   grey1?: string;
   grey2?: string;
   grey3?: string;
   grey4?: string;
   grey5?: string;
-  greyOutline?: string;
-  searchBg?: string;
-  warning?: string;
-  disabled?: string;
-  divider?: string;
   currentTheme?: string;
 }
 

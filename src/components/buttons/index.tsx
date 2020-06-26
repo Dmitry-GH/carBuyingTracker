@@ -1,7 +1,10 @@
 import * as React from 'react';
-import {View} from 'react-native';
-import {SocialIcon, SocialMediaType, Button} from 'react-native-elements';
-import styles from './styles';
+import {SocialMediaType} from 'react-native-elements';
+import {
+  StyledButton,
+  StyledSocialButton,
+  StyledButtonContainer,
+} from './styles';
 
 interface TouchableButtonProps {
   title: string;
@@ -23,14 +26,7 @@ export const TouchableButton: React.FC<TouchableButtonProps> = ({
   onPress,
   disabled,
 }): JSX.Element => (
-  <Button
-    buttonStyle={styles.button}
-    containerStyle={styles.buttonContainer}
-    disabled={disabled}
-    onPress={() => onPress()}
-    title={title}
-    titleStyle={styles.titleStyle}
-  />
+  <StyledButton disabled={disabled} onPress={() => onPress()} title={title} />
 );
 
 export const AuthButton: React.FC<AuthButtonProps> = ({
@@ -38,13 +34,12 @@ export const AuthButton: React.FC<AuthButtonProps> = ({
   type,
   onPress,
 }): JSX.Element => (
-  <View style={styles.buttonContainer}>
-    <SocialIcon
+  <StyledButtonContainer>
+    <StyledSocialButton
       button
       onPress={() => onPress()}
-      style={styles.socialButton}
       title={title}
       type={type}
     />
-  </View>
+  </StyledButtonContainer>
 );

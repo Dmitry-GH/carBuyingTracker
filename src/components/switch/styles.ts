@@ -4,7 +4,7 @@ import {Switch} from 'react-native';
 export const StyledSwitch = styled(Switch).attrs((props) => ({
   ios_backgroundColor: props.theme.grey3,
   thumbColor: props.value ? props.theme.primary : props.theme.grey5,
-  trackColor: {false: props.theme.grey3, true: props.theme.main_highlight},
+  trackColor: {false: props.theme.grey3, true: props.theme.main_text},
 }))`
   align-self: flex-end;
   height: 40px;

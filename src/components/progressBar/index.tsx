@@ -22,7 +22,7 @@ const ProgressBar: React.FC<ProgressBar> = ({
 
   useEffect(() => {
     Animated.timing(animation.current, {
-      toValue: progress,
+      toValue: progress <= finalProgress ? progress : finalProgress,
       duration: 2000,
       useNativeDriver: false,
     }).start();

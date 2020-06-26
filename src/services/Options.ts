@@ -57,10 +57,10 @@ const setDefaultOptions = () => {
     bottomTab: {
       fontSize: 14,
       selectedFontSize: 14,
-      iconColor: theme.main_highlight,
-      selectedIconColor: theme.main_accent,
-      textColor: theme.main_highlight,
-      selectedTextColor: theme.main_accent,
+      iconColor: theme.main_text,
+      selectedIconColor: theme.primary,
+      textColor: theme.main_text,
+      selectedTextColor: theme.primary,
     },
   });
 };

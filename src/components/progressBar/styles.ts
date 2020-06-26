@@ -23,7 +23,7 @@ export const StyledProgressBar = styled.View`
 `;
 
 export const StyledProgressBarText = styled.Text`
-  color: ${(props) => props.theme.main_text};
+  color: ${(props) => props.theme.main_text_contrast};
   font-size: 20px;
   font-weight: bold;
 `;

@@ -35,7 +35,7 @@ async function fetchUserLoginRequest() {
     const userCredentials = await GoogleSignin.getTokens();
     return userCredentials;
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 }
 

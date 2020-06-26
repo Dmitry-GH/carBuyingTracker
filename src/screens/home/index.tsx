@@ -124,10 +124,14 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
                 <Input
                   keyboardType={'number-pad'}
                   onChangeText={(collectedMoney) => {
-                    setCollectedMoney_local(collectedMoney);
+                    setCollectedMoney_local(
+                      collectedMoney.replace(/[^0-9]/g, ''),
+                    );
                   }}
                   onEndEditing={(e) => {
-                    setCollectedMoney(+e.nativeEvent.text);
+                    let number = +e.nativeEvent.text;
+                    setCollectedMoney_local(`${number}`.replace(/[^0-9]/g, ''));
+                    setCollectedMoney(number);
                   }}
                   value={`${collectedMoney_local}`}
                 />
