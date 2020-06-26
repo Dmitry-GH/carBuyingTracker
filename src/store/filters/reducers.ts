@@ -18,6 +18,49 @@ const initialState: FiltersState = {
   error: null,
 };
 
+const categoryENG = [
+  {
+    name: 'Cars',
+    value: 1,
+  },
+  {
+    name: 'Moto',
+    value: 2,
+  },
+  {
+    name: 'Water transport',
+    value: 3,
+  },
+  {
+    name: 'Special equipment',
+    value: 4,
+  },
+  {
+    name: 'Trailers',
+    value: 5,
+  },
+  {
+    name: 'Trucks',
+    value: 6,
+  },
+  {
+    name: 'Buses',
+    value: 7,
+  },
+  {
+    name: 'Motorhomes',
+    value: 8,
+  },
+  {
+    name: 'Air transport',
+    value: 9,
+  },
+  {
+    name: 'Agricultural machinery',
+    value: 10,
+  },
+];
+
 const filters = (state = initialState, action: ActionTypes_I): FiltersState => {
   switch (action.type) {
     case CATEGORY_REQUEST:
@@ -31,7 +74,7 @@ const filters = (state = initialState, action: ActionTypes_I): FiltersState => {
         ...state,
         pending: false,
         error: null,
-        category: action.category,
+        category: action.category.length === 10 ? categoryENG : action.category,
         mark: [],
         model: [],
       };
