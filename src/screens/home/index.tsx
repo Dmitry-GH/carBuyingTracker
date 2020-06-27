@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import Navigation from '../../services/Navigation';
 import {
@@ -21,6 +20,7 @@ import {
   StyledText,
   StyledHomeImage,
   StyledHomeImageWrapper,
+  StyledTextError,
 } from './styles';
 import ProgressBar from '../../components/progressBar';
 import moment from 'moment';
@@ -42,7 +42,7 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
   const theme = useSelector((s: GlobalState) => s.theme);
 
   const [collectedMoney_local, setCollectedMoney_local] = useState<string>(
-    `${user.collectedMoney}`,
+    `$${user.collectedMoney}`,
   );
 
   const interQuartileMean =
@@ -143,16 +143,20 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
                   <Input
                     keyboardType={'number-pad'}
                     onChangeText={(collectedMoney) => {
-                      setCollectedMoney_local(
-                        collectedMoney.replace(/[^0-9]/g, ''),
-                      );
+                      let moneyString = collectedMoney.replace(/[^0-9]/g, '');
+
+                      setCollectedMoney_local(`$${moneyString}`);
                     }}
                     onEndEditing={(e) => {
-                      let number = +e.nativeEvent.text;
-                      setCollectedMoney_local(
-                        `${number}`.replace(/[^0-9]/g, ''),
+                      let moneyString = e.nativeEvent.text;
+                      let moneyStringFiltered = moneyString.replace(
+                        /[^0-9]/g,
+                        '',
                       );
-                      setCollectedMoney(number);
+                      let moneyNumber = +moneyStringFiltered;
+
+                      setCollectedMoney_local(`$${moneyNumber}`);
+                      setCollectedMoney(moneyNumber);
                     }}
                     value={`${collectedMoney_local}`}
                   />
@@ -175,12 +179,12 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
           </>
         ) : (
           <>
-            <Text style={{color: theme.main_text}}>
-              Sorry, there is 0 advertisement for this search query.
-            </Text>
-            <Text style={{color: theme.main_text}}>
-              You can try to change some search parameter.
-            </Text>
+            <StyledBlock>
+              <StyledTextError>
+                Sorry, there is 0 advertisement for this search query. {'\n'}
+                You can try to change some search parameter.
+              </StyledTextError>
+            </StyledBlock>
           </>
         )}
       </Flex2>
