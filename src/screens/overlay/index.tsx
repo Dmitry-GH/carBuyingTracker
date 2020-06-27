@@ -4,10 +4,15 @@ import {
   StyledOverlayContainer,
   StyledOverlayTitle,
   StyledOverlayCheckboxItem,
+  StyledTextWrapper,
+  StyledTextColumn,
+  StyledBtnWrapper,
+  StyledScrollView,
+  StyledText,
 } from './styles';
 import {TouchableButton} from '../../components/buttons';
-import {Text} from 'react-native';
 import {Navigation} from 'react-native-navigation';
+import moment from 'moment';
 
 const Overlay: OverlayComponentType = ({
   componentId,
@@ -27,17 +32,54 @@ const Overlay: OverlayComponentType = ({
   return (
     <StyledOverlay>
       <StyledOverlayContainer>
-        <StyledOverlayTitle>{title}</StyledOverlayTitle>
-        <Text>arithmeticMean: ${arithmeticMean}</Text>
-        <Text>interQuartileMean: ${interQuartileMean}</Text>
-        <Text>Total car advert found: {userCar.average_price?.total}</Text>
-        <StyledOverlayCheckboxItem
-          checked={checkedItem === '1'}
-          iconRight
-          onPress={() => setCheckedItem('1')}
-          title="Item"
-        />
-        <TouchableButton onPress={dismiss} title="OK" />
+        <StyledScrollView>
+          <StyledOverlayTitle>{title}</StyledOverlayTitle>
+
+          <StyledTextWrapper>
+            <StyledTextColumn>
+              <StyledText>Total car advert found:</StyledText>
+              <StyledText>{userCar.average_price?.total}</StyledText>
+            </StyledTextColumn>
+            <StyledTextColumn>
+              {userCar.average_price_timestamp && (
+                <>
+                  <StyledText>Last Updated at:</StyledText>
+                  <StyledText>
+                    {moment(userCar.average_price_timestamp).format(
+                      'DD.MM.YYYY HH:mm',
+                    )}
+                  </StyledText>
+                </>
+              )}
+            </StyledTextColumn>
+          </StyledTextWrapper>
+
+          <StyledText>
+            Interquartile mean - the arithmetic mean of the values between the
+            first and fourth quantile. More simply, this is the arithmetic
+            average excluding 25% of the smallest and largest values.
+          </StyledText>
+          <StyledOverlayCheckboxItem
+            checked={checkedItem === '1'}
+            iconRight
+            onPress={() => setCheckedItem('1')}
+            title={`Interquartile mean:    $${interQuartileMean}`}
+          />
+
+          <StyledText>
+            Arithmetic mean - sum of all cars cost divided by the number of that
+            cars.
+          </StyledText>
+          <StyledOverlayCheckboxItem
+            checked={checkedItem === '1'}
+            iconRight
+            onPress={() => setCheckedItem('1')}
+            title={`Arithmetic mean:    $${arithmeticMean}`}
+          />
+          <StyledBtnWrapper>
+            <TouchableButton onPress={dismiss} title="OK" />
+          </StyledBtnWrapper>
+        </StyledScrollView>
       </StyledOverlayContainer>
     </StyledOverlay>
   );

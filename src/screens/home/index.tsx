@@ -13,9 +13,7 @@ import {
   StyledContainer,
   StyledBlock,
   StyledInputContainer,
-  Flex1,
   Flex2,
-  Flex3,
 } from '../../configs/stylesGlobal';
 import {
   StyledHomeProgressContainer,
@@ -164,15 +162,6 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
                 </StyledBlock>
               </StyledInputContainer>
             </StyledHomeProgressContainer>
-
-            {user.userCar.average_price_timestamp && (
-              <Text style={{color: theme.main_text}}>
-                Last Updated at:
-                {moment(user.userCar.average_price_timestamp).format(
-                  'DD.MM.YYYY HH:mm',
-                )}
-              </Text>
-            )}
           </>
         ) : (
           <>
