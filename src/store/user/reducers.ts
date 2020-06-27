@@ -113,6 +113,8 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
                 name: action.userCarData.name,
                 value: action.userCarData.value,
               },
+              year_from: null,
+              year_to: null,
               changed: true,
               average_price: null,
               average_price_timestamp: null,

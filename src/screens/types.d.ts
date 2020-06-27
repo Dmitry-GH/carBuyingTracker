@@ -19,7 +19,7 @@ type SignUpComponentType = NavigationComponent<SignUpComponentProps>;
 
 interface OverlayComponentProps {
   title: string;
-  message: string;
+  userCar: UserInfo['userCar'];
 }
 type OverlayComponentType = NavigationComponent<OverlayComponentProps>;
 

@@ -30,7 +30,7 @@ export const openOverlay = (props: OverlayComponentProps) =>
       },
       passProps: {
         title: props.title,
-        message: props.message,
+        userCar: props.userCar,
       },
     },
   });

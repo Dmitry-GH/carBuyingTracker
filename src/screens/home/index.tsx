@@ -8,16 +8,26 @@ import {
 } from '../../store/user/actions';
 import {Input} from '../../components/input';
 import {TouchableButton} from '../../components/buttons';
-
 import {goToAuth, openOverlay} from '../navigation';
 import {
   StyledContainer,
   StyledBlock,
   StyledInputContainer,
+  Flex1,
+  Flex2,
+  Flex3,
 } from '../../configs/stylesGlobal';
-import {StyledHomeProgressContainer, StyledText} from './styles';
+import {
+  StyledHomeProgressContainer,
+  StyledTitle,
+  StyledText,
+  StyledHomeImage,
+  StyledHomeImageWrapper,
+} from './styles';
 import ProgressBar from '../../components/progressBar';
 import moment from 'moment';
+
+const logo = require('../../assets/images/logo_transparent.png');
 
 const Home = ({componentId}: {componentId: string}): JSX.Element => {
   const dispatch = useDispatch();
@@ -57,6 +67,15 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
     }
   }, [user.userCar.average_price_timestamp]);
 
+  const avarageTypeOverlay = () => {
+    const data = {
+      title: 'Select avarage price type',
+      userCar: user.userCar,
+    };
+
+    openOverlay(data);
+  };
+
   useEffect(() => {
     try {
       if (!user.isLoggedIn) {
@@ -95,93 +114,77 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
 
   return (
     <StyledContainer>
-      <Text style={{color: theme.main_text}}>
-        Category: {user.userCar.category?.name}
-      </Text>
-      <Text style={{color: theme.main_text}}>
-        Mark: {user.userCar.mark?.name}
-      </Text>
-      <Text style={{color: theme.main_text}}>
-        Model: {user.userCar.model?.name}
-      </Text>
-      <Text style={{color: theme.main_text}}>
-        Year from: {user.userCar.year_from}
-      </Text>
-      <Text style={{color: theme.main_text}}>
-        Year to: {user.userCar.year_to}
-      </Text>
+      <StyledHomeImageWrapper>
+        <StyledHomeImage source={logo} />
+      </StyledHomeImageWrapper>
+      <Flex2>
+        <StyledTitle>
+          Progress of raising money for{'\n'}
+          {user.userCar.mark?.name} {user.userCar.model?.name}
+          {user.userCar.year_from && ' '}
+          {user.userCar.year_from} {user.userCar.year_to && '-'}{' '}
+          {user.userCar.year_to}
+        </StyledTitle>
 
-      {user.userCar.average_price?.total ? (
-        <>
-          <StyledHomeProgressContainer>
-            <ProgressBar
-              backgroundColor={theme.primary || 'rgba(224, 97, 14, 1)'}
-              finalProgress={interQuartileMean || 0}
-              progress={user.collectedMoney}
-            />
-            <StyledInputContainer>
-              <StyledBlock>
-                <Input
-                  keyboardType={'number-pad'}
-                  onChangeText={(collectedMoney) => {
-                    setCollectedMoney_local(
-                      collectedMoney.replace(/[^0-9]/g, ''),
-                    );
-                  }}
-                  onEndEditing={(e) => {
-                    let number = +e.nativeEvent.text;
-                    setCollectedMoney_local(`${number}`.replace(/[^0-9]/g, ''));
-                    setCollectedMoney(number);
-                  }}
-                  value={`${collectedMoney_local}`}
-                />
-              </StyledBlock>
-              <StyledBlock>
-                <StyledText>collected of</StyledText>
-              </StyledBlock>
-              <StyledBlock>
-                <TouchableButton
-                  onPress={() =>
-                    openOverlay({
-                      title: 'Select avarage price type',
-                      message: 'test',
-                    })
-                  }
-                  title="2000"
-                />
-                {/* <Text style={{color: theme.main_text}}>
-                  arithmeticMean: ${arithmeticMean}
-                </Text>
-                <Text style={{color: theme.main_text}}>
-                  interQuartileMean: ${interQuartileMean}
-                </Text> */}
-              </StyledBlock>
-            </StyledInputContainer>
-          </StyledHomeProgressContainer>
+        {user.userCar.average_price?.total ? (
+          <>
+            <StyledHomeProgressContainer>
+              <ProgressBar
+                backgroundColor={theme.primary || 'rgba(224, 97, 14, 1)'}
+                finalProgress={interQuartileMean || 0}
+                progress={user.collectedMoney}
+              />
+              <StyledInputContainer>
+                <StyledBlock>
+                  <Input
+                    keyboardType={'number-pad'}
+                    onChangeText={(collectedMoney) => {
+                      setCollectedMoney_local(
+                        collectedMoney.replace(/[^0-9]/g, ''),
+                      );
+                    }}
+                    onEndEditing={(e) => {
+                      let number = +e.nativeEvent.text;
+                      setCollectedMoney_local(
+                        `${number}`.replace(/[^0-9]/g, ''),
+                      );
+                      setCollectedMoney(number);
+                    }}
+                    value={`${collectedMoney_local}`}
+                  />
+                </StyledBlock>
+                <StyledBlock>
+                  <StyledText>collected of</StyledText>
+                </StyledBlock>
+                <StyledBlock>
+                  <TouchableButton
+                    onPress={() => avarageTypeOverlay()}
+                    title="2000"
+                  />
+                </StyledBlock>
+              </StyledInputContainer>
+            </StyledHomeProgressContainer>
 
-          <Text style={{color: theme.main_text}}>
-            total: {user.userCar.average_price?.total}
-          </Text>
-
-          {user.userCar.average_price_timestamp && (
+            {user.userCar.average_price_timestamp && (
+              <Text style={{color: theme.main_text}}>
+                Last Updated at:
+                {moment(user.userCar.average_price_timestamp).format(
+                  'DD.MM.YYYY HH:mm',
+                )}
+              </Text>
+            )}
+          </>
+        ) : (
+          <>
             <Text style={{color: theme.main_text}}>
-              Last Updated at:
-              {moment(user.userCar.average_price_timestamp).format(
-                'DD.MM.YYYY HH:mm',
-              )}
+              Sorry, there is 0 advertisement for this search query.
             </Text>
-          )}
-        </>
-      ) : (
-        <>
-          <Text style={{color: theme.main_text}}>
-            Sorry, there is 0 advertisement for this search query.
-          </Text>
-          <Text style={{color: theme.main_text}}>
-            You can try to change some search parameter.
-          </Text>
-        </>
-      )}
+            <Text style={{color: theme.main_text}}>
+              You can try to change some search parameter.
+            </Text>
+          </>
+        )}
+      </Flex2>
     </StyledContainer>
   );
 };

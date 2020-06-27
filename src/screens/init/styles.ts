@@ -1,14 +1,21 @@
-import {StyleSheet} from 'react-native';
+import styled from 'styled-components/native';
 
-const styles = StyleSheet.create({
-  textCenter: {
-    fontSize: 28,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+export const StyledInitImage = styled.Image`
+  align-self: center;
+  width: 400px;
+  height: 400px;
+`;
 
-export default styles;
+export const StyledInitImageWrapper = styled.View`
+  flex: 2;
+  align-content: center;
+  justify-content: center;
+`;
+
+export const StyledInitContainer = styled.View`
+  background-color: ${(props) => props.theme.main_background};
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+`;

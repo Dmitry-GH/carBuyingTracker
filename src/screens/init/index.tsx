@@ -1,8 +1,13 @@
 import React, {useEffect} from 'react';
-import {View, Text} from 'react-native';
 import {useSelector} from 'react-redux';
-import styles from './styles';
+import {
+  StyledInitImageWrapper,
+  StyledInitImage,
+  StyledInitContainer,
+} from './styles';
 import {goToAuth, goHome} from '../navigation';
+
+const logo = require('../../assets/images/logo_transparent.png');
 
 const Initialising: InitialisingComponentType = (): JSX.Element => {
   const user = useSelector((s: GlobalState) => s.user);
@@ -21,9 +26,11 @@ const Initialising: InitialisingComponentType = (): JSX.Element => {
   }, [user]);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.textCenter}>Loading...</Text>
-    </View>
+    <StyledInitContainer>
+      <StyledInitImageWrapper>
+        <StyledInitImage source={logo} />
+      </StyledInitImageWrapper>
+    </StyledInitContainer>
   );
 };
 

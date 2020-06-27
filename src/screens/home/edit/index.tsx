@@ -118,6 +118,9 @@ const HomeEdit = (): JSX.Element => {
       };
 
       openModal(data);
+
+      setYearFrom(user.userCar?.year_from || '');
+      setYearTo(user.userCar?.year_to || '');
     } else {
       console.log(filters.error);
     }
