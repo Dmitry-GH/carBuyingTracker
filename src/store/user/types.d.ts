@@ -55,6 +55,11 @@ interface UserCar {
   isYearRange: boolean;
   average_price: null | UserAveragePrice;
   average_price_timestamp: null | number;
+  average_price_type: 'interquartile' | 'arithmetic';
+}
+
+interface UserToggleAvaragePriceType {
+  type: string;
 }
 
 interface UserAveragePriceAction {

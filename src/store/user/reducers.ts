@@ -12,6 +12,7 @@ import {
   USER_AVERAGE_PRICE_FAILURE,
   USER_CAR_SET_YEAR_RANGE,
   USER_SET_COLLECTED_MONEY,
+  USER_TOGGLE_AVARAGE_PRICE_TYPE,
 } from './actions';
 
 const initialState: UserState = {
@@ -28,6 +29,7 @@ const initialState: UserState = {
     isYearRange: false,
     average_price: null,
     average_price_timestamp: Date.now(),
+    average_price_type: 'interquartile',
   },
   pending: false,
   error: null,
@@ -212,6 +214,17 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
       return {
         ...state,
         collectedMoney: action.collectedMoney,
+      };
+    case USER_TOGGLE_AVARAGE_PRICE_TYPE:
+      return {
+        ...state,
+        userCar: {
+          ...state.userCar,
+          average_price_type:
+            state.userCar.average_price_type === 'interquartile'
+              ? 'arithmetic'
+              : 'interquartile',
+        },
       };
 
     default:

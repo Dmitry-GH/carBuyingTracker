@@ -34,7 +34,7 @@ export const StyledTextColumn = styled.View`
 `;
 
 export const StyledText = styled.Text`
-  color: ${(props) => props.theme.main_text_contrast};
+  color: ${(props) => props.theme.main_text_white};
   font-size: 16px;
   text-align: justify;
 `;
@@ -73,7 +73,7 @@ export const StyledOverlayCheckboxItem = styled(CheckBox).attrs((props) => ({
     paddingVertical: 5,
   },
   textStyle: {
-    color: props.theme.main_text_white,
+    color: props.theme.main_text_contrast,
     textAlign: 'center',
     fontSize: 16,
   },

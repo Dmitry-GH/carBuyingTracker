@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
+import {useDispatch} from 'react-redux';
 import {
   StyledOverlay,
   StyledOverlayContainer,
@@ -12,6 +13,7 @@ import {
 } from './styles';
 import {TouchableButton} from '../../components/buttons';
 import {Navigation} from 'react-native-navigation';
+import {userToggleAvaragePriceType} from '../../store/user/actions';
 import moment from 'moment';
 
 const Overlay: OverlayComponentType = ({
@@ -19,7 +21,16 @@ const Overlay: OverlayComponentType = ({
   title,
   userCar,
 }): JSX.Element => {
-  const dismiss = () => Navigation.dismissOverlay(componentId);
+  const dispatch = useDispatch();
+  const toggleAvaragePriceType = useCallback(
+    () => dispatch(userToggleAvaragePriceType()),
+    [dispatch],
+  );
+
+  const dismiss = () => {
+    toggleAvaragePriceType();
+    Navigation.dismissOverlay(componentId);
+  };
   const interQuartileMean =
     userCar.average_price &&
     Math.round(userCar.average_price?.interQuartileMean);
@@ -27,7 +38,9 @@ const Overlay: OverlayComponentType = ({
   const arithmeticMean =
     userCar.average_price && Math.round(userCar.average_price?.arithmeticMean);
 
-  const [checkedItem, setCheckedItem] = useState<string>('');
+  const [checkedItem, setCheckedItem] = useState<string>(
+    userCar.average_price_type,
+  );
 
   return (
     <StyledOverlay>
@@ -60,9 +73,9 @@ const Overlay: OverlayComponentType = ({
             average excluding 25% of the smallest and largest values.
           </StyledText>
           <StyledOverlayCheckboxItem
-            checked={checkedItem === '1'}
+            checked={checkedItem === 'interquartile'}
             iconRight
-            onPress={() => setCheckedItem('1')}
+            onPress={() => setCheckedItem('interquartile')}
             title={`Interquartile mean:    $${interQuartileMean}`}
           />
 
@@ -71,9 +84,9 @@ const Overlay: OverlayComponentType = ({
             cars.
           </StyledText>
           <StyledOverlayCheckboxItem
-            checked={checkedItem === '1'}
+            checked={checkedItem === 'arithmetic'}
             iconRight
-            onPress={() => setCheckedItem('1')}
+            onPress={() => setCheckedItem('arithmetic')}
             title={`Arithmetic mean:    $${arithmeticMean}`}
           />
           <StyledBtnWrapper>

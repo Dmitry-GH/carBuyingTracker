@@ -53,6 +53,8 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
     user.userCar.average_price &&
     Math.round(user.userCar.average_price?.arithmeticMean);
 
+  const averagePriceType = user.userCar.average_price_type;
+
   const getTimestampDiff = useCallback(() => {
     let savedTimestamp = user.userCar.average_price_timestamp;
     let timestamp = savedTimestamp ? moment(savedTimestamp) : moment();
@@ -129,7 +131,11 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
             <StyledHomeProgressContainer>
               <ProgressBar
                 backgroundColor={theme.primary || 'rgba(224, 97, 14, 1)'}
-                finalProgress={interQuartileMean || 0}
+                finalProgress={
+                  (averagePriceType === 'interquartile'
+                    ? interQuartileMean
+                    : arithmeticMean) || 0
+                }
                 progress={user.collectedMoney}
               />
               <StyledInputContainer>
@@ -157,7 +163,11 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
                 <StyledBlock>
                   <TouchableButton
                     onPress={() => avarageTypeOverlay()}
-                    title="2000"
+                    title={
+                      averagePriceType === 'interquartile'
+                        ? `$${interQuartileMean}`
+                        : `$${arithmeticMean}`
+                    }
                   />
                 </StyledBlock>
               </StyledInputContainer>

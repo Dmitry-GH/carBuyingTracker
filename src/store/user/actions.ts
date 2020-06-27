@@ -16,6 +16,7 @@ export const USER_AVERAGE_PRICE_SUCCESS = 'USER_AVERAGE_PRICE_SUCCESS';
 export const USER_AVERAGE_PRICE_FAILURE = 'USER_AVERAGE_PRICE_FAILURE';
 
 export const USER_SET_COLLECTED_MONEY = 'USER_SET_COLLECTED_MONEY';
+export const USER_TOGGLE_AVARAGE_PRICE_TYPE = 'USER_TOGGLE_AVARAGE_PRICE_TYPE';
 
 export const userLoginRequest = (): UserLoginAction => ({
   type: USER_LOGIN_REQUEST,
@@ -96,4 +97,8 @@ export const userSetCollectedMoney = (
 ): UserSetCollectedMoney => ({
   type: USER_SET_COLLECTED_MONEY,
   collectedMoney,
+});
+
+export const userToggleAvaragePriceType = (): UserToggleAvaragePriceType => ({
+  type: USER_TOGGLE_AVARAGE_PRICE_TYPE,
 });
