@@ -99,6 +99,9 @@ export const userSetCollectedMoney = (
   collectedMoney,
 });
 
-export const userToggleAvaragePriceType = (): UserToggleAvaragePriceType => ({
+export const userToggleAvaragePriceType = (
+  average_price_type: UserCar['average_price_type'],
+): UserToggleAvaragePriceType => ({
   type: USER_TOGGLE_AVARAGE_PRICE_TYPE,
+  average_price_type,
 });

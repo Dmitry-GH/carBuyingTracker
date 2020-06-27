@@ -60,6 +60,7 @@ interface UserCar {
 
 interface UserToggleAvaragePriceType {
   type: string;
+  average_price_type: UserCar['average_price_type'];
 }
 
 interface UserAveragePriceAction {
@@ -128,7 +129,8 @@ type UserActionTypes_U =
   | UserAveragePriceAction
   | UserAveragePriceActionSuccess
   | UserAveragePriceActionFailure
-  | UserSetCollectedMoney; // Union Types
+  | UserSetCollectedMoney
+  | UserToggleAvaragePriceType; // Union Types
 
 type UserActionTypes_I = UserLoginAction &
   UserLoginActionFailure &
@@ -138,4 +140,5 @@ type UserActionTypes_I = UserLoginAction &
   UserAveragePriceAction &
   UserAveragePriceActionSuccess &
   UserAveragePriceActionFailure &
-  UserSetCollectedMoney; // Intersection Types
+  UserSetCollectedMoney &
+  UserToggleAvaragePriceType; // Intersection Types

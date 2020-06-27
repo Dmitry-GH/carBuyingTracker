@@ -23,12 +23,13 @@ const Overlay: OverlayComponentType = ({
 }): JSX.Element => {
   const dispatch = useDispatch();
   const toggleAvaragePriceType = useCallback(
-    () => dispatch(userToggleAvaragePriceType()),
+    (priceType: UserCar['average_price_type']) =>
+      dispatch(userToggleAvaragePriceType(priceType)),
     [dispatch],
   );
 
   const dismiss = () => {
-    toggleAvaragePriceType();
+    toggleAvaragePriceType(checkedItem);
     Navigation.dismissOverlay(componentId);
   };
   const interQuartileMean =
@@ -38,7 +39,7 @@ const Overlay: OverlayComponentType = ({
   const arithmeticMean =
     userCar.average_price && Math.round(userCar.average_price?.arithmeticMean);
 
-  const [checkedItem, setCheckedItem] = useState<string>(
+  const [checkedItem, setCheckedItem] = useState<UserCar['average_price_type']>(
     userCar.average_price_type,
   );
 
@@ -75,7 +76,9 @@ const Overlay: OverlayComponentType = ({
           <StyledOverlayCheckboxItem
             checked={checkedItem === 'interquartile'}
             iconRight
-            onPress={() => setCheckedItem('interquartile')}
+            onPress={() => {
+              !!interQuartileMean && setCheckedItem('interquartile');
+            }}
             title={`Interquartile mean:    $${interQuartileMean}`}
           />
 
@@ -86,7 +89,9 @@ const Overlay: OverlayComponentType = ({
           <StyledOverlayCheckboxItem
             checked={checkedItem === 'arithmetic'}
             iconRight
-            onPress={() => setCheckedItem('arithmetic')}
+            onPress={() => {
+              !!arithmeticMean && setCheckedItem('arithmetic');
+            }}
             title={`Arithmetic mean:    $${arithmeticMean}`}
           />
           <StyledBtnWrapper>

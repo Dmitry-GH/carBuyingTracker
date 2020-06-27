@@ -83,6 +83,11 @@ const HomeEdit = (): JSX.Element => {
         setInputErrorChecker(type, false);
       }
     }
+
+    if (type === 'year_to' && !yearFrom.length) {
+      setYearFrom('1900');
+      setUserCarYear('year_from', '1900');
+    }
   };
 
   const handleYearInputChange = (

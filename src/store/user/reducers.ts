@@ -29,7 +29,7 @@ const initialState: UserState = {
     isYearRange: false,
     average_price: null,
     average_price_timestamp: Date.now(),
-    average_price_type: 'interquartile',
+    average_price_type: 'arithmetic',
   },
   pending: false,
   error: null,
@@ -220,10 +220,7 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
         ...state,
         userCar: {
           ...state.userCar,
-          average_price_type:
-            state.userCar.average_price_type === 'interquartile'
-              ? 'arithmetic'
-              : 'interquartile',
+          average_price_type: action.average_price_type,
         },
       };
 
