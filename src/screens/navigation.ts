@@ -7,12 +7,37 @@ import {
   SETTINGS,
   MODAL,
   OVERLAY,
+  ACTIVITY_INDICATOR,
 } from './index';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type ModalProps = {
   title: string;
   type: string;
+};
+
+export const ActivityIndicator = (props: ActivityIndicatorProps) => {
+  if (props.action) {
+    Navigation.showOverlay({
+      component: {
+        id: 'ACTIVITY_INDICATOR',
+        name: ACTIVITY_INDICATOR,
+        options: {
+          layout: {
+            componentBackgroundColor: 'transparent',
+          },
+          overlay: {
+            interceptTouchOutside: true,
+          },
+        },
+        passProps: {
+          action: props.action,
+        },
+      },
+    });
+  } else {
+    Navigation.dismissOverlay('ACTIVITY_INDICATOR');
+  }
 };
 
 export const openOverlay = (props: OverlayComponentProps) =>

@@ -8,3 +8,4 @@ export const INITIALIZING = `${APP_NAME}.Initializing`;
 export const SETTINGS = `${APP_NAME}.Settings`;
 export const MODAL = `${APP_NAME}.Modal`;
 export const OVERLAY = `${APP_NAME}.Overlay`;
+export const ACTIVITY_INDICATOR = `${APP_NAME}.ActivityIndicator`;

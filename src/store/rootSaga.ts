@@ -12,6 +12,8 @@ import {
   watchFetchModel,
 } from './filters/sagas';
 
+import {watchForPendingActivity} from './activityIndicatorSaga';
+
 export default function* rootSaga() {
   yield all([
     fetchUserLogin(),
@@ -21,5 +23,6 @@ export default function* rootSaga() {
     watchFetchCategory(),
     watchFetchMark(),
     watchFetchModel(),
+    watchForPendingActivity(),
   ]);
 }

@@ -12,7 +12,7 @@ import {
   StyledInputContainer,
   StyledButtonsList,
   Flex1,
-  Flex3,
+  Flex8,
 } from '../../../configs/stylesGlobal';
 import {StyledInputHeaderContainer, StyledInputHeader} from './styles';
 import moment from 'moment';
@@ -134,7 +134,7 @@ const HomeEdit = (): JSX.Element => {
   return (
     <StyledContainer>
       <Flex1 />
-      <Flex3>
+      <Flex8>
         <StyledButtonsList>
           <TouchableButton
             onPress={() => modal('category')}
@@ -197,7 +197,7 @@ const HomeEdit = (): JSX.Element => {
             </StyledBlock>
           )}
         </StyledInputContainer>
-      </Flex3>
+      </Flex8>
       <Flex1 />
     </StyledContainer>
   );

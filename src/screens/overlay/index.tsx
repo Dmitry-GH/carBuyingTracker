@@ -12,7 +12,7 @@ import {
   StyledText,
 } from './styles';
 import {TouchableButton} from '../../components/buttons';
-import {Navigation} from 'react-native-navigation';
+import Navigation from '../../services/Navigation';
 import {userToggleAvaragePriceType} from '../../store/user/actions';
 import moment from 'moment';
 

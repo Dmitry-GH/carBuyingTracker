@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {Platform} from 'react-native';
 
 export const Flex1 = styled.View`
   flex: 1;
@@ -11,6 +12,24 @@ export const Flex2 = styled.View`
 export const Flex3 = styled.View`
   flex: 3;
 `;
+
+export const Flex8 = styled.View`
+  flex: 8;
+`;
+
+export const StyledActivityIndicator = styled.ActivityIndicator.attrs(
+  (props) => ({
+    color: props.theme.primary,
+    ...Platform.select({
+      android: {
+        size: 100,
+      },
+      ios: {
+        size: 'large',
+      },
+    }),
+  }),
+)``;
 
 export const StyledContainer = styled.View`
   flex: 1;
@@ -38,7 +57,7 @@ export const StyledInputContainer = styled.View`
 
 export const StyledButtonsList = styled.View`
   display: flex;
-  flex: 1;
+  flex: 1 0 auto;
   align-items: center;
   justify-content: space-around;
 `;
