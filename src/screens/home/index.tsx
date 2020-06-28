@@ -21,6 +21,7 @@ import {
   StyledHomeImage,
   StyledHomeImageWrapper,
   StyledTextError,
+  StyledTextWelcome,
 } from './styles';
 import ProgressBar from '../../components/progressBar';
 import moment from 'moment';
@@ -118,16 +119,15 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
         <StyledHomeImage source={logo} />
       </StyledHomeImageWrapper>
       <Flex2>
-        <StyledTitle>
-          Progress of raising money for{'\n'}
-          {user.userCar.mark?.name} {user.userCar.model?.name}
-          {user.userCar.year_from && ' '}
-          {user.userCar.year_from} {user.userCar.year_to && '-'}{' '}
-          {user.userCar.year_to}
-        </StyledTitle>
-
         {user.userCar.average_price?.total ? (
           <>
+            <StyledTitle>
+              Progress of raising money for{'\n'}
+              {user.userCar.mark?.name} {user.userCar.model?.name}
+              {user.userCar.year_from && ' '}
+              {user.userCar.year_from} {user.userCar.year_to && '-'}{' '}
+              {user.userCar.year_to}
+            </StyledTitle>
             <StyledHomeProgressContainer>
               <ProgressBar
                 backgroundColor={theme.primary || 'rgba(224, 97, 14, 1)'}
@@ -179,12 +179,21 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
           </>
         ) : (
           <>
-            <StyledBlock>
-              <StyledTextError>
-                Sorry, there is 0 advertisement for this search query. {'\n'}
-                You can try to change some search parameter.
-              </StyledTextError>
-            </StyledBlock>
+            {user.userCar.category ? (
+              <StyledBlock>
+                <StyledTextError>
+                  Sorry, there is 0 advertisement for this search query. {'\n'}
+                  You can try to change some search parameter.
+                </StyledTextError>
+              </StyledBlock>
+            ) : (
+              <StyledBlock>
+                <StyledTextWelcome>
+                  Welcome!{'\n'}
+                  You can select a car on edit screen.
+                </StyledTextWelcome>
+              </StyledBlock>
+            )}
           </>
         )}
       </Flex2>
