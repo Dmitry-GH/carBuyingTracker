@@ -1,20 +1,25 @@
 import styled from 'styled-components/native';
 import {Platform} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 export const Flex1 = styled.View`
   flex: 1;
+  flex: 1 0 auto;
 `;
 
 export const Flex2 = styled.View`
   flex: 2;
+  flex: 2 0 auto;
 `;
 
 export const Flex3 = styled.View`
   flex: 3;
+  flex: 3 0 auto;
 `;
 
 export const Flex8 = styled.View`
   flex: 8;
+  flex: 8 0 auto;
 `;
 
 export const StyledActivityIndicator = styled.ActivityIndicator.attrs(
@@ -31,13 +36,16 @@ export const StyledActivityIndicator = styled.ActivityIndicator.attrs(
   }),
 )``;
 
-export const StyledContainer = styled.View`
+export const StyledSafeAreaView = styled.SafeAreaView`
   flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  padding: 5px;
 `;
+
+export const StyledContainer = styled(KeyboardAwareScrollView).attrs(() => ({
+  contentContainerStyle: {
+    flexGrow: 1,
+    padding: 5,
+  },
+}))``;
 
 export const StyledBlock = styled.View`
   display: flex;

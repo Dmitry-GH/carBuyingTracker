@@ -18,6 +18,7 @@ export const StyledButton = styled(Button).attrs((props) => ({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     marginHorizontal: 9,
+    marginVertical: 10,
   },
   titleStyle: {fontSize: 18},
 }))``;

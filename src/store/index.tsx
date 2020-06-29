@@ -4,6 +4,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import configureStore from './configureStore';
 import {ThemeProvider as ThemeProviderRNE} from 'react-native-elements';
 import {ThemeProvider as ThemeProviderSC} from 'styled-components/native';
+import {StyledSafeAreaView} from '../configs/stylesGlobal';
 export const {store, persistor} = configureStore();
 
 export const withReduxProvider = (C: React.FC) => (props: any) => (
@@ -11,7 +12,9 @@ export const withReduxProvider = (C: React.FC) => (props: any) => (
     <PersistGate loading={null} persistor={persistor}>
       <ThemeProviderRNE theme={{colors: store.getState().theme}}>
         <ThemeProviderSC theme={store.getState().theme}>
-          <C {...props} />
+          <StyledSafeAreaView>
+            <C {...props} />
+          </StyledSafeAreaView>
         </ThemeProviderSC>
       </ThemeProviderRNE>
     </PersistGate>

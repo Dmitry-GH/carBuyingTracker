@@ -5,7 +5,12 @@ import {userLogout} from '../../store/user/actions';
 import {refreshAppTheme} from '../../services/Options';
 import {TouchableButton} from '../../components/buttons';
 import {goToAuth} from '../navigation';
-import {StyledButtonsList, Flex2} from '../../configs/stylesGlobal';
+import {
+  StyledButtonsList,
+  Flex1,
+  Flex3,
+  StyledContainer,
+} from '../../configs/stylesGlobal';
 
 const Settings = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -29,22 +34,25 @@ const Settings = (): JSX.Element => {
   }, [user]);
 
   return (
-    <>
-      <Flex2 />
-      <StyledButtonsList>
-        <TouchableButton
-          onPress={() => {
-            let themeVariant = theme.currentTheme === 'dark' ? 'light' : 'dark';
-            changeTheme(themeVariant);
-            refreshAppTheme();
-          }}
-          title="Toggle Theme"
-        />
+    <StyledContainer>
+      <Flex3 />
+      <Flex1>
+        <StyledButtonsList>
+          <TouchableButton
+            onPress={() => {
+              let themeVariant =
+                theme.currentTheme === 'dark' ? 'light' : 'dark';
+              changeTheme(themeVariant);
+              refreshAppTheme();
+            }}
+            title="Toggle Theme"
+          />
 
-        <TouchableButton onPress={logoutUser} title="Sign Out" />
-      </StyledButtonsList>
-      <Flex2 />
-    </>
+          <TouchableButton onPress={logoutUser} title="Sign Out" />
+        </StyledButtonsList>
+      </Flex1>
+      <Flex3 />
+    </StyledContainer>
   );
 };
 

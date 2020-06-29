@@ -7,7 +7,7 @@ import {
 } from '../../store/user/actions';
 import {Input} from '../../components/input';
 import {TouchableButton} from '../../components/buttons';
-import {goToAuth, openOverlay} from '../navigation';
+import {goToAuth, openOverlay, openHomeEditModal} from '../navigation';
 import {
   StyledContainer,
   StyledBlock,
@@ -180,22 +180,24 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
         ) : (
           <>
             {user.userCar.category ? (
-              <StyledBlock>
-                <StyledTextError>
-                  Sorry, there is 0 advertisement for this search query. {'\n'}
-                  You can try to change some search parameter.
-                </StyledTextError>
-              </StyledBlock>
+              <StyledTextError>
+                Sorry, there is 0 advertisement for this search query. {'\n'}
+                You can try to change some search parameter.
+              </StyledTextError>
             ) : (
-              <StyledBlock>
-                <StyledTextWelcome>
-                  Welcome!{'\n'}
-                  You can select a car on edit screen.
-                </StyledTextWelcome>
-              </StyledBlock>
+              <StyledTextWelcome>
+                Welcome!{'\n'}
+                You can select a car on edit screen.
+              </StyledTextWelcome>
             )}
           </>
         )}
+        <StyledBlock>
+          <TouchableButton
+            onPress={() => openHomeEditModal()}
+            title="Car select"
+          />
+        </StyledBlock>
       </Flex2>
     </StyledContainer>
   );

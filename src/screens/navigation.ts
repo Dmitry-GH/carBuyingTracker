@@ -77,8 +77,29 @@ export const openModal = (props: ModalProps) =>
               },
             },
             passProps: {
-              test: 'test',
               type: props.type,
+            },
+          },
+        },
+      ],
+    },
+  });
+
+export const openHomeEditModal = () =>
+  Navigation.showModal({
+    stack: {
+      children: [
+        {
+          component: {
+            id: 'HOME_EDIT',
+            name: HOME_EDIT,
+            options: {
+              topBar: {
+                title: {
+                  fontSize: 30,
+                  text: 'Car select',
+                },
+              },
             },
           },
         },
@@ -154,9 +175,9 @@ export const goToAuth = () =>
 
 export const goHome = () =>
   Promise.all([
-    Icon.getImageSource('login', 25),
-    Icon.getImageSource('account-plus', 25),
-  ]).then(([signInImg, signUpImg]) => {
+    Icon.getImageSource('car', 25),
+    Icon.getImageSource('settings', 25),
+  ]).then(([carImg, settingsImg]) => {
     Navigation.setRoot({
       root: {
         bottomTabs: {
@@ -177,41 +198,17 @@ export const goHome = () =>
                   topBar: {
                     title: {
                       fontSize: 30,
-                      text: 'HOME',
+                      text: 'Home',
                     },
                   },
                   bottomTab: {
-                    text: 'HOME',
-                    icon: signInImg,
+                    text: 'Home',
+                    icon: carImg,
                   },
                 },
               },
             },
-            {
-              stack: {
-                id: 'HOME_EDIT_TAB',
-                children: [
-                  {
-                    component: {
-                      id: 'HOME_EDIT',
-                      name: HOME_EDIT,
-                    },
-                  },
-                ],
-                options: {
-                  topBar: {
-                    title: {
-                      fontSize: 30,
-                      text: 'HOME EDIT',
-                    },
-                  },
-                  bottomTab: {
-                    text: 'HOME EDIT',
-                    icon: signInImg,
-                  },
-                },
-              },
-            },
+
             {
               stack: {
                 id: 'SETTINGS_TAB',
@@ -227,12 +224,12 @@ export const goHome = () =>
                   topBar: {
                     title: {
                       fontSize: 30,
-                      text: 'SETTINGS',
+                      text: 'Settings',
                     },
                   },
                   bottomTab: {
-                    text: 'SETTINGS',
-                    icon: signUpImg,
+                    text: 'Settings',
+                    icon: settingsImg,
                   },
                 },
               },

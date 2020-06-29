@@ -10,6 +10,7 @@ export const StyledInput = styled(Input).attrs((props) => ({
   },
   containerStyle: {
     paddingHorizontal: 8,
+    marginVertical: 10,
   },
   inputStyle: {
     borderRadius: BORDER_RADIUS,

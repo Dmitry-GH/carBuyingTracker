@@ -5,6 +5,7 @@ import {Input} from '../../../components/input';
 import {Switch} from '../../../components/switch';
 import {getCategory, getMark, getModel} from '../../../store/filters/actions';
 import {openModal} from '../../navigation';
+import Navigation from '../../../services/Navigation';
 import {userCarSetYear, setIsYearRange} from '../../../store/user/actions';
 import {
   StyledContainer,
@@ -12,7 +13,7 @@ import {
   StyledInputContainer,
   StyledButtonsList,
   Flex1,
-  Flex8,
+  Flex3,
 } from '../../../configs/stylesGlobal';
 import {StyledInputHeaderContainer, StyledInputHeader} from './styles';
 import moment from 'moment';
@@ -22,7 +23,7 @@ type YearInputError = boolean;
 const currentYear = moment().year();
 const YearInputValidationErrorText = `Please write correct year in range from 1900 to ${currentYear}`;
 
-const HomeEdit = (): JSX.Element => {
+const HomeEdit = ({componentId}: {componentId: string}): JSX.Element => {
   const dispatch = useDispatch();
 
   const fetchCategory = useCallback(() => dispatch(getCategory()), [dispatch]);
@@ -134,7 +135,7 @@ const HomeEdit = (): JSX.Element => {
   return (
     <StyledContainer>
       <Flex1 />
-      <Flex8>
+      <Flex3>
         <StyledButtonsList>
           <TouchableButton
             onPress={() => modal('category')}
@@ -197,8 +198,16 @@ const HomeEdit = (): JSX.Element => {
             </StyledBlock>
           )}
         </StyledInputContainer>
-      </Flex8>
+      </Flex3>
+
       <Flex1 />
+
+      <Flex1>
+        <TouchableButton
+          onPress={() => Navigation.dismissModal(componentId)}
+          title="OK"
+        />
+      </Flex1>
     </StyledContainer>
   );
 };
