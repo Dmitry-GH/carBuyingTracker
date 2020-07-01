@@ -69,6 +69,7 @@ interface UserAveragePriceAction {
 
 interface IsYearRange {
   type: string;
+  isYearRange: boolean;
 }
 
 interface UserAveragePriceActionSuccess {
@@ -109,9 +110,9 @@ interface UserCarSetAction {
 
 interface UserCarSetYearAction {
   type: string;
-  userCarData: {
-    type: string;
-    value: string;
+  years: {
+    year_from: string;
+    year_to: string;
   };
 }
 
@@ -130,6 +131,7 @@ type UserActionTypes_U =
   | UserAveragePriceActionSuccess
   | UserAveragePriceActionFailure
   | UserSetCollectedMoney
+  | IsYearRange
   | UserToggleAvaragePriceType; // Union Types
 
 type UserActionTypes_I = UserLoginAction &
@@ -141,4 +143,5 @@ type UserActionTypes_I = UserLoginAction &
   UserAveragePriceActionSuccess &
   UserAveragePriceActionFailure &
   UserSetCollectedMoney &
+  IsYearRange &
   UserToggleAvaragePriceType; // Intersection Types

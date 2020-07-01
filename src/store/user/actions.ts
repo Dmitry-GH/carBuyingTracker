@@ -30,8 +30,9 @@ export const getAveragePriceRequest = (): UserAveragePriceAction => ({
   type: USER_AVERAGE_PRICE_REQUEST,
 });
 
-export const setIsYearRange = (): IsYearRange => ({
+export const setIsYearRange = (isYearRange: boolean): IsYearRange => ({
   type: USER_CAR_SET_YEAR_RANGE,
+  isYearRange,
 });
 
 export const userLogout = (): UserLogoutAction => ({
@@ -82,14 +83,10 @@ export const userCarSet = (
 });
 
 export const userCarSetYear = (
-  type: string,
-  value: string,
+  years: UserCarSetYearAction['years'],
 ): UserCarSetYearAction => ({
   type: USER_CAR_SET_YEAR,
-  userCarData: {
-    type,
-    value,
-  },
+  years,
 });
 
 export const userSetCollectedMoney = (

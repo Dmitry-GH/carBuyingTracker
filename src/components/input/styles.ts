@@ -27,8 +27,11 @@ export const StyledInput = styled(Input).attrs((props) => ({
     backgroundColor: props.theme.disabled,
   },
   errorStyle: {
-    minHeight: 40,
-    color: props.theme.error,
+    padding: 5,
+    marginHorizontal: 0,
+    borderRadius: BORDER_RADIUS,
+    color: props.theme.main_text_white,
+    backgroundColor: props.theme.error,
     textAlign: 'center',
     fontSize: 14,
   },

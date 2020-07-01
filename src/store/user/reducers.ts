@@ -129,42 +129,25 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
       }
     }
     case USER_CAR_SET_YEAR: {
-      switch (action.userCarData.type) {
-        case 'year_from':
-          return {
-            ...state,
-            userCar: {
-              ...state.userCar,
-              year_from: action.userCarData.value,
-              changed: true,
-              average_price: null,
-              average_price_timestamp: null,
-            },
-          };
-        case 'year_to':
-          return {
-            ...state,
-            userCar: {
-              ...state.userCar,
-              year_to: action.userCarData.value,
-              changed: true,
-              average_price: null,
-              average_price_timestamp: null,
-            },
-          };
-        default:
-          return {
-            ...state,
-          };
-      }
+      return {
+        ...state,
+        userCar: {
+          ...state.userCar,
+          year_from: action.years.year_from,
+          year_to: action.years.year_to,
+          changed: true,
+          average_price: null,
+          average_price_timestamp: null,
+        },
+      };
     }
     case USER_CAR_SET_YEAR_RANGE:
       return {
         ...state,
         userCar: {
           ...state.userCar,
-          isYearRange: !state.userCar.isYearRange,
-          year_to: state.userCar.isYearRange ? null : state.userCar.year_to,
+          isYearRange: action.isYearRange,
+          year_to: action.isYearRange ? state.userCar.year_to : null,
           changed: true,
           average_price: null,
           average_price_timestamp: null,

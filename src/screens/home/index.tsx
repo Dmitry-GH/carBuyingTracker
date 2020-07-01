@@ -1,10 +1,7 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import Navigation from '../../services/Navigation';
-import {
-  getAveragePriceRequest,
-  userSetCollectedMoney,
-} from '../../store/user/actions';
+import {getAveragePriceRequest, userSetCollectedMoney} from '../../store/user/actions';
 import {Input} from '../../components/input';
 import {TouchableButton} from '../../components/buttons';
 import {goToAuth, openOverlay, openHomeEditModal} from '../navigation';
@@ -30,10 +27,9 @@ const logo = require('../../assets/images/logo_transparent.png');
 
 const Home = ({componentId}: {componentId: string}): JSX.Element => {
   const dispatch = useDispatch();
-  const getAveragePrice = useCallback(
-    () => dispatch(getAveragePriceRequest()),
-    [dispatch],
-  );
+  const getAveragePrice = useCallback(() => dispatch(getAveragePriceRequest()), [
+    dispatch,
+  ]);
   const setCollectedMoney = useCallback(
     (collectedMoney: number) => dispatch(userSetCollectedMoney(collectedMoney)),
     [dispatch],
@@ -51,15 +47,14 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
     Math.round(user.userCar.average_price?.interQuartileMean);
 
   const arithmeticMean =
-    user.userCar.average_price &&
-    Math.round(user.userCar.average_price?.arithmeticMean);
+    user.userCar.average_price && Math.round(user.userCar.average_price?.arithmeticMean);
 
   const averagePriceType = user.userCar.average_price_type;
 
   const getTimestampDiff = useCallback(() => {
-    let savedTimestamp = user.userCar.average_price_timestamp;
-    let timestamp = savedTimestamp ? moment(savedTimestamp) : moment();
-    let diffTimeInMinutes = moment().diff(timestamp, 'm');
+    const savedTimestamp = user.userCar.average_price_timestamp;
+    const timestamp = savedTimestamp ? moment(savedTimestamp) : moment();
+    const diffTimeInMinutes = moment().diff(timestamp, 'm');
 
     if (diffTimeInMinutes > 30) {
       return true;
@@ -143,17 +138,14 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
                   <Input
                     keyboardType={'number-pad'}
                     onChangeText={(collectedMoney) => {
-                      let moneyString = collectedMoney.replace(/[^0-9]/g, '');
+                      const moneyString = collectedMoney.replace(/[^0-9]/g, '');
 
                       setCollectedMoney_local(`$${moneyString}`);
                     }}
                     onEndEditing={(e) => {
-                      let moneyString = e.nativeEvent.text;
-                      let moneyStringFiltered = moneyString.replace(
-                        /[^0-9]/g,
-                        '',
-                      );
-                      let moneyNumber = +moneyStringFiltered;
+                      const moneyString = e.nativeEvent.text;
+                      const moneyStringFiltered = moneyString.replace(/[^0-9]/g, '');
+                      const moneyNumber = +moneyStringFiltered;
 
                       setCollectedMoney_local(`$${moneyNumber}`);
                       setCollectedMoney(moneyNumber);
@@ -193,10 +185,7 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
           </>
         )}
         <StyledBlock>
-          <TouchableButton
-            onPress={() => openHomeEditModal()}
-            title="Car select"
-          />
+          <TouchableButton onPress={() => openHomeEditModal()} title="Car select" />
         </StyledBlock>
       </Flex2>
     </StyledContainer>

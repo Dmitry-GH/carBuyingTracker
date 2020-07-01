@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import {BORDER_RADIUS} from '../../../configs';
 
 export const StyledInputHeaderContainer = styled.View`
-  margin: 60px 10px 20px 10px;
+  margin: 5px 10px 20px 10px;
   padding: 10px 20px;
   flex-direction: row;
   border-radius: ${BORDER_RADIUS}px;

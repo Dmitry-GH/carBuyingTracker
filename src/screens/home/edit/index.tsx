@@ -18,10 +18,14 @@ import {
 import {StyledInputHeaderContainer, StyledInputHeader} from './styles';
 import moment from 'moment';
 
-type YearInputError = boolean;
+type YearInputError = {
+  year_from_err: boolean;
+  year_to_err: boolean;
+};
 
 const currentYear = moment().year();
-const YearInputValidationErrorText = `Please write correct year in range from 1900 to ${currentYear}`;
+const YearInputValidationErrorText = `\
+Please write correct year in range from 1900 to ${currentYear}`;
 
 const HomeEdit = ({componentId}: {componentId: string}): JSX.Element => {
   const dispatch = useDispatch();
@@ -29,77 +33,92 @@ const HomeEdit = ({componentId}: {componentId: string}): JSX.Element => {
   const fetchCategory = useCallback(() => dispatch(getCategory()), [dispatch]);
   const fetchMark = useCallback(() => dispatch(getMark()), [dispatch]);
   const fetchModel = useCallback(() => dispatch(getModel()), [dispatch]);
-  const setYearRange = useCallback(() => dispatch(setIsYearRange()), [
+  const setYearRange = useCallback((value) => dispatch(setIsYearRange(value)), [
     dispatch,
   ]);
 
   const setUserCarYear = useCallback(
-    (yearType: string, value: string) =>
-      dispatch(userCarSetYear(yearType, value)),
+    (years: UserCarSetYearAction['years']) => dispatch(userCarSetYear(years)),
     [dispatch],
   );
 
   const user = useSelector((s: GlobalState) => s.user);
   const filters = useSelector((s: GlobalState) => s.filters);
 
-  const [yearFrom, setYearFrom] = useState<string>(
-    user.userCar?.year_from || '',
-  );
-  const [yearTo, setYearTo] = useState<string>(user.userCar?.year_to || '');
-  const [inputErrorYearFrom, setInputErrorYearFrom] = useState<YearInputError>(
-    false,
-  );
-  const [inputErrorYearTo, setInputErrorYearTo] = useState<YearInputError>(
-    false,
-  );
+  const [years, setYears] = useState<UserCarSetYearAction['years']>({
+    year_from: user.userCar?.year_from || '',
+    year_to: user.userCar?.year_to || '',
+  });
 
-  const [isYearsRange, setisYearsRange] = useState(user.userCar?.isYearRange);
+  const [inputErrorYears, setInputErrorYears] = useState<YearInputError>({
+    year_from_err: false,
+    year_to_err: false,
+  });
+
+  const [isYearsRange, setIsYearsRange] = useState<boolean>(user.userCar?.isYearRange);
 
   const toggleSwitch = () => {
-    setYearRange();
-    setYearTo('');
-    setisYearsRange((previousState) => !previousState);
+    setYears({...years, year_to: ''});
+    setInputErrorYears({year_from_err: false, year_to_err: false});
+    setIsYearsRange((previousState) => !previousState);
   };
 
-  const setInputErrorChecker = (
-    type: 'year_from' | 'year_to',
-    isError: boolean,
-  ) => {
-    type === 'year_from'
-      ? setInputErrorYearFrom(isError)
-      : setInputErrorYearTo(isError);
-  };
+  const validateYearInput = () => {
+    const year_from_int = Number(years.year_from);
+    const year_to_int = Number(years.year_to);
 
-  const validateYearInput = (year: string, type: 'year_from' | 'year_to') => {
-    if (+year >= 1900 && +year <= currentYear) {
-      setUserCarYear(type, year);
+    const isYearFromValid = year_from_int >= 1900 && year_from_int <= currentYear;
+    const isYearToValid = year_to_int >= 1900 && year_to_int <= currentYear;
+    const isYearFromSmaller = year_from_int <= year_to_int;
+    let yearsErrorStatus;
 
-      setInputErrorChecker(type, false);
+    if (!year_from_int && !year_to_int) {
+      yearsErrorStatus = {year_from_err: false, year_to_err: false};
     } else {
-      if (year.length) {
-        setInputErrorChecker(type, true);
+      if (isYearsRange) {
+        if (!year_from_int || !year_to_int) {
+          yearsErrorStatus = {
+            year_from_err: !isYearFromValid,
+            year_to_err: !isYearToValid,
+          };
+        } else {
+          if (isYearFromValid && isYearToValid) {
+            yearsErrorStatus = {
+              year_from_err: !(isYearFromValid && isYearFromSmaller),
+              year_to_err: !(isYearToValid && isYearFromSmaller),
+            };
+          } else {
+            yearsErrorStatus = {
+              year_from_err: !isYearFromValid,
+              year_to_err: !isYearToValid,
+            };
+          }
+        }
       } else {
-        setUserCarYear(type, year);
-
-        setInputErrorChecker(type, false);
+        if (isYearFromValid) {
+          yearsErrorStatus = {year_to_err: false, year_from_err: false};
+        } else {
+          yearsErrorStatus = {year_to_err: true, year_from_err: true};
+        }
       }
     }
 
-    if (type === 'year_to' && !yearFrom.length) {
-      setYearFrom('1900');
-      setUserCarYear('year_from', '1900');
+    setInputErrorYears(yearsErrorStatus);
+    if (!yearsErrorStatus.year_from_err && !yearsErrorStatus.year_to_err) {
+      return true;
+    } else {
+      return false;
     }
   };
 
-  const handleYearInputChange = (
-    year: string,
-    type: 'year_from' | 'year_to',
-  ) => {
-    if (type === 'year_from') {
-      year.length > 4 ? setYearFrom(yearFrom) : setYearFrom(year);
-    } else {
-      year.length > 4 ? setYearTo(yearTo) : setYearTo(year);
-    }
+  const handleYearInputChange = (year: string, type: 'year_from' | 'year_to') => {
+    const validatedYear = year.replace(/[^0-9]/g, '');
+
+    setYears({...years, [type]: validatedYear});
+
+    validatedYear.length > 4
+      ? setYears({...years, [type]: years[type]})
+      : setYears({...years, [type]: validatedYear});
   };
 
   const modal = (type: string) => {
@@ -124,11 +143,16 @@ const HomeEdit = ({componentId}: {componentId: string}): JSX.Element => {
       };
 
       openModal(data);
-
-      setYearFrom(user.userCar?.year_from || '');
-      setYearTo(user.userCar?.year_to || '');
     } else {
       console.log(filters.error);
+    }
+  };
+
+  const saveChanges = () => {
+    if (validateYearInput()) {
+      setYearRange(isYearsRange);
+      setUserCarYear(years);
+      Navigation.dismissModal(componentId);
     }
   };
 
@@ -152,6 +176,38 @@ const HomeEdit = ({componentId}: {componentId: string}): JSX.Element => {
             title={user.userCar?.model?.name || 'Model'}
           />
         </StyledButtonsList>
+        <StyledInputContainer>
+          <StyledBlock>
+            <Input
+              disabled={!user.userCar?.model}
+              errorMessage={
+                inputErrorYears.year_from_err ? YearInputValidationErrorText : ''
+              }
+              keyboardType={'number-pad'}
+              onChangeText={(year) => {
+                handleYearInputChange(year, 'year_from');
+              }}
+              placeholder={isYearsRange ? 'Year from' : 'Year'}
+              value={years.year_from}
+            />
+          </StyledBlock>
+          {isYearsRange && (
+            <StyledBlock>
+              <Input
+                disabled={!user.userCar?.model}
+                errorMessage={
+                  inputErrorYears.year_to_err ? YearInputValidationErrorText : ''
+                }
+                keyboardType={'number-pad'}
+                onChangeText={(year) => {
+                  handleYearInputChange(year, 'year_to');
+                }}
+                placeholder={'Year to'}
+                value={years.year_to}
+              />
+            </StyledBlock>
+          )}
+        </StyledInputContainer>
         <StyledInputHeaderContainer>
           <StyledBlock>
             <StyledInputHeader>Year range</StyledInputHeader>
@@ -160,53 +216,12 @@ const HomeEdit = ({componentId}: {componentId: string}): JSX.Element => {
             <Switch onValueChange={toggleSwitch} value={isYearsRange} />
           </StyledBlock>
         </StyledInputHeaderContainer>
-        <StyledInputContainer>
-          <StyledBlock>
-            <Input
-              disabled={!user.userCar?.model}
-              errorMessage={
-                inputErrorYearFrom ? YearInputValidationErrorText : ''
-              }
-              keyboardType={'number-pad'}
-              onChangeText={(year) => {
-                handleYearInputChange(year, 'year_from');
-              }}
-              onEndEditing={(e) => {
-                validateYearInput(e.nativeEvent.text, 'year_from');
-              }}
-              placeholder={isYearsRange ? 'Year from' : 'Year'}
-              value={yearFrom}
-            />
-          </StyledBlock>
-          {isYearsRange && (
-            <StyledBlock>
-              <Input
-                disabled={!user.userCar?.model}
-                errorMessage={
-                  inputErrorYearTo ? YearInputValidationErrorText : ''
-                }
-                keyboardType={'number-pad'}
-                onChangeText={(year) => {
-                  handleYearInputChange(year, 'year_to');
-                }}
-                onEndEditing={(e) => {
-                  validateYearInput(e.nativeEvent.text, 'year_to');
-                }}
-                placeholder={'Year to'}
-                value={yearTo}
-              />
-            </StyledBlock>
-          )}
-        </StyledInputContainer>
       </Flex3>
 
       <Flex1 />
 
       <Flex1>
-        <TouchableButton
-          onPress={() => Navigation.dismissModal(componentId)}
-          title="OK"
-        />
+        <TouchableButton onPress={() => saveChanges()} title="Save" />
       </Flex1>
     </StyledContainer>
   );
