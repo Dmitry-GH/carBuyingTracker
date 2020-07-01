@@ -24,11 +24,7 @@ const SignIn = (): JSX.Element => {
 
   return (
     <View style={styles.container}>
-      <AuthButton
-        onPress={() => fetchUser()}
-        title="Sign in with Google"
-        type="google"
-      />
+      <AuthButton onPress={() => fetchUser()} title="Sign in with Google" type="google" />
     </View>
   );
 };

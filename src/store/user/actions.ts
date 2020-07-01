@@ -4,8 +4,7 @@ export const USER_LOGIN_FAILURE = 'USER_LOGIN_FAILURE';
 export const USER_REGISTER_REQUEST = 'USER_REGISTER_REQUEST';
 
 export const USER_LOGOUT = 'USER_LOGOUT';
-export const USER_LOGIN_REDIRECT_TO_REGISTER =
-  'USER_LOGIN_REDIRECT_TO_REGISTER';
+export const USER_LOGIN_REDIRECT_TO_REGISTER = 'USER_LOGIN_REDIRECT_TO_REGISTER';
 
 export const USER_CAR_SET = 'USER_CAR_SET';
 export const USER_CAR_SET_YEAR = 'USER_CAR_SET_YEAR';
@@ -39,9 +38,7 @@ export const userLogout = (): UserLogoutAction => ({
   type: USER_LOGOUT,
 });
 
-export const userLoginSuccess = (
-  userData: UserDataGoogle,
-): UserLoginActionSuccess => ({
+export const userLoginSuccess = (userData: UserDataGoogle): UserLoginActionSuccess => ({
   type: USER_LOGIN_SUCCESS,
   userData,
 });
@@ -62,9 +59,7 @@ export const getAveragePriceSuccess = (
   averagePrice,
 });
 
-export const getAveragePriceFailure = (
-  error: Error,
-): UserAveragePriceActionFailure => ({
+export const getAveragePriceFailure = (error: Error): UserAveragePriceActionFailure => ({
   type: USER_AVERAGE_PRICE_FAILURE,
   error,
 });
@@ -89,9 +84,7 @@ export const userCarSetYear = (
   years,
 });
 
-export const userSetCollectedMoney = (
-  collectedMoney: number,
-): UserSetCollectedMoney => ({
+export const userSetCollectedMoney = (collectedMoney: number): UserSetCollectedMoney => ({
   type: USER_SET_COLLECTED_MONEY,
   collectedMoney,
 });

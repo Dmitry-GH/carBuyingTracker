@@ -40,8 +40,7 @@ const Settings = (): JSX.Element => {
         <StyledButtonsList>
           <TouchableButton
             onPress={() => {
-              let themeVariant =
-                theme.currentTheme === 'dark' ? 'light' : 'dark';
+              let themeVariant = theme.currentTheme === 'dark' ? 'light' : 'dark';
               changeTheme(themeVariant);
               refreshAppTheme();
             }}

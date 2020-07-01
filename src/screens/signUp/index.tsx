@@ -8,9 +8,7 @@ import styles from './styles';
 
 const SignUp = (): JSX.Element => {
   const dispatch = useDispatch();
-  const fetchNewUser = useCallback(() => dispatch(userRegisterRequest()), [
-    dispatch,
-  ]);
+  const fetchNewUser = useCallback(() => dispatch(userRegisterRequest()), [dispatch]);
 
   const user = useSelector((s: GlobalState) => s.user);
 

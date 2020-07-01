@@ -6,11 +6,7 @@ import {
   userLogout,
   userFetchAveragePrice,
 } from './user/sagas';
-import {
-  watchFetchCategory,
-  watchFetchMark,
-  watchFetchModel,
-} from './filters/sagas';
+import {watchFetchCategory, watchFetchMark, watchFetchModel} from './filters/sagas';
 
 import {watchForPendingActivity} from './activityIndicatorSaga';
 

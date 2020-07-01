@@ -22,19 +22,17 @@ export const Flex8 = styled.View`
   flex: 8 0 auto;
 `;
 
-export const StyledActivityIndicator = styled.ActivityIndicator.attrs(
-  (props) => ({
-    color: props.theme.primary,
-    ...Platform.select({
-      android: {
-        size: 100,
-      },
-      ios: {
-        size: 'large',
-      },
-    }),
+export const StyledActivityIndicator = styled.ActivityIndicator.attrs((props) => ({
+  color: props.theme.primary,
+  ...Platform.select({
+    android: {
+      size: 100,
+    },
+    ios: {
+      size: 'large',
+    },
   }),
-)``;
+}))``;
 
 export const StyledSafeAreaView = styled.SafeAreaView`
   flex: 1;

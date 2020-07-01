@@ -1,10 +1,6 @@
 import * as React from 'react';
 import {SocialMediaType} from 'react-native-elements';
-import {
-  StyledButton,
-  StyledSocialButton,
-  StyledButtonContainer,
-} from './styles';
+import {StyledButton, StyledSocialButton, StyledButtonContainer} from './styles';
 
 interface TouchableButtonProps {
   title: string;
@@ -35,11 +31,6 @@ export const AuthButton: React.FC<AuthButtonProps> = ({
   onPress,
 }): JSX.Element => (
   <StyledButtonContainer>
-    <StyledSocialButton
-      button
-      onPress={() => onPress()}
-      title={title}
-      type={type}
-    />
+    <StyledSocialButton button onPress={() => onPress()} title={title} type={type} />
   </StyledButtonContainer>
 );

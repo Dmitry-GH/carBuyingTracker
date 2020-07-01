@@ -4,7 +4,6 @@ import {SwitchProps} from 'react-native';
 
 type SwitchType = SwitchProps;
 
-export const Switch: React.FC<SwitchType> = ({
-  onValueChange,
-  value,
-}): JSX.Element => <StyledSwitch onValueChange={onValueChange} value={value} />;
+export const Switch: React.FC<SwitchType> = ({onValueChange, value}): JSX.Element => (
+  <StyledSwitch onValueChange={onValueChange} value={value} />
+);

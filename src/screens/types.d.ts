@@ -24,6 +24,4 @@ interface OverlayComponentProps {
 type OverlayComponentType = NavigationComponent<OverlayComponentProps>;
 
 interface InitialisingComponentProps {}
-type InitialisingComponentType = NavigationComponent<
-  InitialisingComponentProps
->;
+type InitialisingComponentType = NavigationComponent<InitialisingComponentProps>;

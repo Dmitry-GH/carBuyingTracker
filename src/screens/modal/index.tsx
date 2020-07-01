@@ -6,13 +6,7 @@ import Navigation from '../../services/Navigation';
 import {ListItem} from 'react-native-elements';
 import styles from './styles';
 
-const Modal = ({
-  type,
-  componentId,
-}: {
-  type: string;
-  componentId: string;
-}): JSX.Element => {
+const Modal = ({type, componentId}: {type: string; componentId: string}): JSX.Element => {
   const dispatch = useDispatch();
   const setUserCar = useCallback(
     (filterType: string, name: string, value: number) =>

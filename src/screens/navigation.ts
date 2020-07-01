@@ -174,68 +174,67 @@ export const goToAuth = () =>
   });
 
 export const goHome = () =>
-  Promise.all([
-    Icon.getImageSource('car', 25),
-    Icon.getImageSource('settings', 25),
-  ]).then(([carImg, settingsImg]) => {
-    Navigation.setRoot({
-      root: {
-        bottomTabs: {
-          id: 'MAIN_BOTTOM_TABS',
-          children: [
-            {
-              stack: {
-                id: 'HOME_TAB',
-                children: [
-                  {
-                    component: {
-                      id: 'HOME',
-                      name: HOME,
+  Promise.all([Icon.getImageSource('car', 25), Icon.getImageSource('settings', 25)]).then(
+    ([carImg, settingsImg]) => {
+      Navigation.setRoot({
+        root: {
+          bottomTabs: {
+            id: 'MAIN_BOTTOM_TABS',
+            children: [
+              {
+                stack: {
+                  id: 'HOME_TAB',
+                  children: [
+                    {
+                      component: {
+                        id: 'HOME',
+                        name: HOME,
+                      },
                     },
-                  },
-                ],
-                options: {
-                  topBar: {
-                    title: {
-                      fontSize: 30,
+                  ],
+                  options: {
+                    topBar: {
+                      title: {
+                        fontSize: 30,
+                        text: 'Home',
+                      },
+                    },
+                    bottomTab: {
                       text: 'Home',
+                      icon: carImg,
                     },
-                  },
-                  bottomTab: {
-                    text: 'Home',
-                    icon: carImg,
                   },
                 },
               },
-            },
 
-            {
-              stack: {
-                id: 'SETTINGS_TAB',
-                children: [
-                  {
-                    component: {
-                      id: 'SETTINGS',
-                      name: SETTINGS,
+              {
+                stack: {
+                  id: 'SETTINGS_TAB',
+                  children: [
+                    {
+                      component: {
+                        id: 'SETTINGS',
+                        name: SETTINGS,
+                      },
                     },
-                  },
-                ],
-                options: {
-                  topBar: {
-                    title: {
-                      fontSize: 30,
+                  ],
+                  options: {
+                    topBar: {
+                      title: {
+                        fontSize: 30,
+                        text: 'Settings',
+                      },
+                    },
+                    bottomTab: {
                       text: 'Settings',
+                      icon: settingsImg,
                     },
-                  },
-                  bottomTab: {
-                    text: 'Settings',
-                    icon: settingsImg,
                   },
                 },
               },
-            },
-          ],
+            ],
+          },
         },
-      },
-    });
-  });
+      });
+    },
+  );

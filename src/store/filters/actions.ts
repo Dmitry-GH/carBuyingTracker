@@ -42,9 +42,7 @@ export const getModel = (): ActionRequest => ({
   type: MODEL_REQUEST,
 });
 
-export const getModelSuccess = (
-  model: FiltersResponse[],
-): ActionSuccessModel => ({
+export const getModelSuccess = (model: FiltersResponse[]): ActionSuccessModel => ({
   type: MODEL_SUCCESS,
   model,
 });

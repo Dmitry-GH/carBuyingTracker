@@ -37,9 +37,7 @@ const ProgressBar: React.FC<ProgressBar> = ({
   return (
     <StyledProgressBarContainer>
       <StyledProgressBar>
-        <Animated.View
-          style={[StyleSheet.absoluteFill, {backgroundColor, width}]}
-        />
+        <Animated.View style={[StyleSheet.absoluteFill, {backgroundColor, width}]} />
         <StyledProgressBarText>{currentPercent}%</StyledProgressBarText>
       </StyledProgressBar>
     </StyledProgressBarContainer>

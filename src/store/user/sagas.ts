@@ -42,10 +42,7 @@ async function fetchUserLoginRequest() {
 function* fetchUser() {
   try {
     const {accessToken, idToken} = yield call(fetchUserLoginRequest);
-    const credential = firebase.auth.GoogleAuthProvider.credential(
-      idToken,
-      accessToken,
-    );
+    const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
     const userData = yield firebase.auth().signInWithCredential(credential);
     console.log(userData);
     const {uid} = userData.user;
@@ -68,10 +65,7 @@ function* fetchUser() {
 function* fetchNewUser() {
   try {
     const {accessToken, idToken} = yield call(fetchUserLoginRequest);
-    const credential = firebase.auth.GoogleAuthProvider.credential(
-      idToken,
-      accessToken,
-    );
+    const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
     const userData = yield firebase.auth().signInWithCredential(credential);
     console.log(userData);
     const {uid, displayName, email, photoURL} = userData.user;
@@ -129,8 +123,5 @@ export function* userLogout() {
 }
 
 export function* userFetchAveragePrice() {
-  yield takeLatest<UserAveragePriceAction>(
-    USER_AVERAGE_PRICE_REQUEST,
-    fetchAveragePrice,
-  );
+  yield takeLatest<UserAveragePriceAction>(USER_AVERAGE_PRICE_REQUEST, fetchAveragePrice);
 }

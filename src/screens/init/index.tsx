@@ -1,10 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
-import {
-  StyledInitImageWrapper,
-  StyledInitImage,
-  StyledInitContainer,
-} from './styles';
+import {StyledInitImageWrapper, StyledInitImage, StyledInitContainer} from './styles';
 import {goToAuth, goHome} from '../navigation';
 
 const logo = require('../../assets/images/logo_transparent.png');

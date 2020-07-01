@@ -16,11 +16,7 @@ import Navigation from '../../services/Navigation';
 import {userToggleAvaragePriceType} from '../../store/user/actions';
 import moment from 'moment';
 
-const Overlay: OverlayComponentType = ({
-  componentId,
-  title,
-  userCar,
-}): JSX.Element => {
+const Overlay: OverlayComponentType = ({componentId, title, userCar}): JSX.Element => {
   const dispatch = useDispatch();
   const toggleAvaragePriceType = useCallback(
     (priceType: UserCar['average_price_type']) =>
@@ -33,8 +29,7 @@ const Overlay: OverlayComponentType = ({
     Navigation.dismissOverlay(componentId);
   };
   const interQuartileMean =
-    userCar.average_price &&
-    Math.round(userCar.average_price?.interQuartileMean);
+    userCar.average_price && Math.round(userCar.average_price?.interQuartileMean);
 
   const arithmeticMean =
     userCar.average_price && Math.round(userCar.average_price?.arithmeticMean);
@@ -59,9 +54,7 @@ const Overlay: OverlayComponentType = ({
                 <>
                   <StyledText>Last Updated at:</StyledText>
                   <StyledText>
-                    {moment(userCar.average_price_timestamp).format(
-                      'DD.MM.YYYY HH:mm',
-                    )}
+                    {moment(userCar.average_price_timestamp).format('DD.MM.YYYY HH:mm')}
                   </StyledText>
                 </>
               )}
@@ -69,9 +62,9 @@ const Overlay: OverlayComponentType = ({
           </StyledTextWrapper>
 
           <StyledText>
-            Interquartile mean - the arithmetic mean of the values between the
-            first and fourth quantile. More simply, this is the arithmetic
-            average excluding 25% of the smallest and largest values.
+            Interquartile mean - the arithmetic mean of the values between the first and
+            fourth quantile. More simply, this is the arithmetic average excluding 25% of
+            the smallest and largest values.
           </StyledText>
           <StyledOverlayCheckboxItem
             checked={checkedItem === 'interquartile'}
@@ -83,8 +76,7 @@ const Overlay: OverlayComponentType = ({
           />
 
           <StyledText>
-            Arithmetic mean - sum of all cars cost divided by the number of that
-            cars.
+            Arithmetic mean - sum of all cars cost divided by the number of that cars.
           </StyledText>
           <StyledOverlayCheckboxItem
             checked={checkedItem === 'arithmetic'}
