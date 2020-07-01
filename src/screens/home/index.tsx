@@ -138,7 +138,11 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
                   <Input
                     keyboardType={'number-pad'}
                     onChangeText={(collectedMoney) => {
-                      const moneyString = collectedMoney.replace(/[^0-9]/g, '');
+                      let moneyString = collectedMoney.replace(/[^0-9]/g, '');
+
+                      if (moneyString.length > 10) {
+                        moneyString = moneyString.substring(0, 10);
+                      }
 
                       setCollectedMoney_local(`$${moneyString}`);
                     }}
