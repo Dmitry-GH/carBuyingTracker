@@ -175,16 +175,20 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
           </>
         ) : (
           <>
-            {user.userCar.category ? (
-              <StyledTextError>
-                Sorry, there is 0 advertisement for this search query. {'\n'}
-                You can try to change some search parameter.
-              </StyledTextError>
-            ) : (
-              <StyledTextWelcome>
-                Welcome!{'\n'}
-                You can select a car on edit screen.
-              </StyledTextWelcome>
+            {!user.pending && (
+              <>
+                {user.userCar.category ? (
+                  <StyledTextError>
+                    Sorry, there is 0 advertisement for this search query. {'\n'}
+                    You can try to change some search parameter.
+                  </StyledTextError>
+                ) : (
+                  <StyledTextWelcome>
+                    Welcome!{'\n'}
+                    You can select a car on edit screen.
+                  </StyledTextWelcome>
+                )}
+              </>
             )}
           </>
         )}
