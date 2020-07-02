@@ -42,6 +42,7 @@ export const StyledHeader = styled.Text`
 export const StyledText = styled.Text`
   color: ${(props) => props.theme.main_text_contrast};
   font-size: 18px;
+  margin: 5px 0;
 `;
 
 export const StyledTextWrap = styled.View``;

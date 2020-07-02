@@ -50,7 +50,14 @@ export const StyledBlock = styled.View`
   display: flex;
   flex: 1;
   align-self: flex-start;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
+`;
+
+export const StyledBlockRight = styled.View`
+  flex: 1;
+  align-self: flex-end;
+  align-items: flex-end;
   justify-content: center;
 `;
 

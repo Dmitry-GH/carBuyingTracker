@@ -10,6 +10,7 @@ import {userCarSetYear, setIsYearRange} from '../../../store/user/actions';
 import {
   StyledContainer,
   StyledBlock,
+  StyledBlockRight,
   StyledInputContainer,
   StyledButtonsList,
   Flex1,
@@ -212,9 +213,9 @@ const HomeEdit = ({componentId}: {componentId: string}): JSX.Element => {
           <StyledBlock>
             <StyledInputHeader>Year range</StyledInputHeader>
           </StyledBlock>
-          <StyledBlock>
+          <StyledBlockRight>
             <Switch onValueChange={toggleSwitch} value={isYearsRange} />
-          </StyledBlock>
+          </StyledBlockRight>
         </StyledInputHeaderContainer>
       </Flex3>
 

@@ -5,12 +5,16 @@ import {userLogout} from '../../store/user/actions';
 import {refreshAppTheme} from '../../services/Options';
 import {TouchableButton} from '../../components/buttons';
 import {goToAuth} from '../navigation';
+import {Switch} from '../../components/switch';
 import {
   StyledButtonsList,
   Flex1,
   Flex3,
   StyledContainer,
+  StyledBlock,
+  StyledBlockRight,
 } from '../../configs/stylesGlobal';
+import {StyledThemeSwitchBlock, StyledThemeSwitchText, StyledBlockSwitch} from './styles';
 
 const Settings = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -22,6 +26,12 @@ const Settings = (): JSX.Element => {
 
   const user = useSelector((s: GlobalState) => s.user);
   const theme = useSelector((s: GlobalState) => s.theme);
+
+  const toggleTheme = () => {
+    let themeVariant = theme.currentTheme === 'dark' ? 'light' : 'dark';
+    changeTheme(themeVariant);
+    refreshAppTheme();
+  };
 
   useEffect(() => {
     try {
@@ -38,14 +48,17 @@ const Settings = (): JSX.Element => {
       <Flex3 />
       <Flex1>
         <StyledButtonsList>
-          <TouchableButton
-            onPress={() => {
-              let themeVariant = theme.currentTheme === 'dark' ? 'light' : 'dark';
-              changeTheme(themeVariant);
-              refreshAppTheme();
-            }}
-            title="Toggle Theme"
-          />
+          <StyledThemeSwitchBlock>
+            <StyledBlock>
+              <StyledThemeSwitchText>Light theme</StyledThemeSwitchText>
+            </StyledBlock>
+            <StyledBlockSwitch>
+              <Switch onValueChange={toggleTheme} value={theme.currentTheme === 'dark'} />
+            </StyledBlockSwitch>
+            <StyledBlockRight>
+              <StyledThemeSwitchText>Dark theme</StyledThemeSwitchText>
+            </StyledBlockRight>
+          </StyledThemeSwitchBlock>
 
           <TouchableButton onPress={logoutUser} title="Sign Out" />
         </StyledButtonsList>
