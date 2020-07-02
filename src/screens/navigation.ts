@@ -8,6 +8,7 @@ import {
   MODAL,
   OVERLAY,
   ACTIVITY_INDICATOR,
+  ABOUT,
 } from './index';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -109,8 +110,8 @@ export const openHomeEditModal = () =>
 
 export const goToAuth = () =>
   Promise.all([
-    Icon.getImageSource('login', 25),
-    Icon.getImageSource('account-plus', 25),
+    Icon.getImageSource('login', 30),
+    Icon.getImageSource('account-plus', 30),
   ]).then(([signInImg, signUpImg]) => {
     Navigation.setRoot({
       root: {
@@ -174,67 +175,95 @@ export const goToAuth = () =>
   });
 
 export const goHome = () =>
-  Promise.all([Icon.getImageSource('car', 25), Icon.getImageSource('settings', 25)]).then(
-    ([carImg, settingsImg]) => {
-      Navigation.setRoot({
-        root: {
-          bottomTabs: {
-            id: 'MAIN_BOTTOM_TABS',
-            children: [
-              {
-                stack: {
-                  id: 'HOME_TAB',
-                  children: [
-                    {
-                      component: {
-                        id: 'HOME',
-                        name: HOME,
-                      },
+  Promise.all([
+    Icon.getImageSource('car', 30),
+    Icon.getImageSource('settings', 30),
+    Icon.getImageSource('information-variant', 30),
+  ]).then(([carImg, settingsImg, aboutImg]) => {
+    Navigation.setRoot({
+      root: {
+        bottomTabs: {
+          id: 'MAIN_BOTTOM_TABS',
+          children: [
+            {
+              stack: {
+                id: 'HOME_TAB',
+                children: [
+                  {
+                    component: {
+                      id: 'HOME',
+                      name: HOME,
                     },
-                  ],
-                  options: {
-                    topBar: {
-                      title: {
-                        fontSize: 30,
-                        text: 'Home',
-                      },
-                    },
-                    bottomTab: {
+                  },
+                ],
+                options: {
+                  topBar: {
+                    title: {
+                      fontSize: 30,
                       text: 'Home',
-                      icon: carImg,
                     },
+                  },
+                  bottomTab: {
+                    text: 'Home',
+                    icon: carImg,
                   },
                 },
               },
+            },
 
-              {
-                stack: {
-                  id: 'SETTINGS_TAB',
-                  children: [
-                    {
-                      component: {
-                        id: 'SETTINGS',
-                        name: SETTINGS,
-                      },
+            {
+              stack: {
+                id: 'SETTINGS_TAB',
+                children: [
+                  {
+                    component: {
+                      id: 'SETTINGS',
+                      name: SETTINGS,
                     },
-                  ],
-                  options: {
-                    topBar: {
-                      title: {
-                        fontSize: 30,
-                        text: 'Settings',
-                      },
-                    },
-                    bottomTab: {
+                  },
+                ],
+                options: {
+                  topBar: {
+                    title: {
+                      fontSize: 30,
                       text: 'Settings',
-                      icon: settingsImg,
                     },
+                  },
+                  bottomTab: {
+                    text: 'Settings',
+                    icon: settingsImg,
                   },
                 },
               },
-            ],
-          },
+            },
+
+            {
+              stack: {
+                id: 'ABOUT_TAB',
+                children: [
+                  {
+                    component: {
+                      id: 'ABOUT',
+                      name: ABOUT,
+                    },
+                  },
+                ],
+                options: {
+                  topBar: {
+                    title: {
+                      fontSize: 30,
+                      text: 'About',
+                    },
+                  },
+                  bottomTab: {
+                    text: 'About',
+                    icon: aboutImg,
+                  },
+                },
+              },
+            },
+          ],
         },
-      });
-    },
-  );
+      },
+    });
+  });

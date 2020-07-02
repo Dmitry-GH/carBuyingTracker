@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import {Platform} from 'react-native';
+import {Divider} from 'react-native-elements';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 export const Flex1 = styled.View`
@@ -66,4 +67,9 @@ export const StyledButtonsList = styled.View`
   flex: 1 0 auto;
   align-items: center;
   justify-content: space-around;
+`;
+export const StyledDivider = styled(Divider)`
+  background-color: ${(props) => props.theme.primary};
+  height: 3px;
+  margin: 30px 0;
 `;

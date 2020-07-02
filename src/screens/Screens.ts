@@ -8,6 +8,7 @@ import {
   MODAL,
   OVERLAY,
   ACTIVITY_INDICATOR,
+  ABOUT,
 } from './index';
 import Initializing from './init';
 import Home from './home';
@@ -18,6 +19,7 @@ import Settings from './settings';
 import Modal from './modal';
 import Overlay from './overlay';
 import ActivityIndicator from '../components/activityIndicator';
+import About from './about';
 
 const Screens = new Map<string, React.FC<any>>();
 
@@ -30,5 +32,6 @@ Screens.set(SETTINGS, Settings);
 Screens.set(MODAL, Modal);
 Screens.set(OVERLAY, Overlay);
 Screens.set(ACTIVITY_INDICATOR, ActivityIndicator);
+Screens.set(ABOUT, About);
 
 export default Screens;
