@@ -1,10 +1,11 @@
-import React, {useCallback} from 'react';
-import {SafeAreaView, FlatList} from 'react-native';
+import React, {useCallback, useState, useEffect} from 'react';
+import {FlatList} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {userCarSet} from '../../store/user/actions';
 import Navigation from '../../services/Navigation';
 import {ListItem} from 'react-native-elements';
-import styles from './styles';
+import {searchTextInArrOfObj} from '../../utils';
+import {StyledSearchBar} from './styles';
 
 const Modal = ({type, componentId}: {type: string; componentId: string}): JSX.Element => {
   const dispatch = useDispatch();
@@ -17,6 +18,9 @@ const Modal = ({type, componentId}: {type: string; componentId: string}): JSX.El
   const theme = useSelector((s: GlobalState) => s.theme);
   const user = useSelector((s: GlobalState) => s.user);
   const filters = useSelector((s: GlobalState) => s.filters);
+
+  const [searchFilter, setSearchFilter] = useState<string>('');
+  const [filteredListData, setFilteredListData] = useState<FiltersResponse[]>([]);
 
   const selectItem = (item: FiltersResponse) => {
     setUserCar(type, item.name, item.value);
@@ -42,19 +46,34 @@ const Modal = ({type, componentId}: {type: string; componentId: string}): JSX.El
 
   const _keyExtractor = (item: FiltersResponse) => `${item.value}`;
 
+  const updateSearch = (search: string) => {
+    setSearchFilter(search);
+
+    let filteredSearch = searchTextInArrOfObj(filters[type], 'name', search);
+    setFilteredListData(filteredSearch);
+  };
+
+  useEffect(() => {
+    if (filters[type]?.length) {
+      setFilteredListData(filters[type]);
+    }
+  }, [filters, type]);
+
   return (
-    <SafeAreaView style={styles.container}>
-      {!!filters[type]?.length && (
-        <FlatList
-          contentContainerStyle={styles.container}
-          data={filters[type]}
-          initialNumToRender={25}
-          keyExtractor={_keyExtractor}
-          renderItem={_renderItem}
-          windowSize={30}
-        />
-      )}
-    </SafeAreaView>
+    <>
+      <StyledSearchBar
+        onChangeText={updateSearch}
+        placeholder="Search ..."
+        value={searchFilter}
+      />
+      <FlatList
+        data={filteredListData}
+        initialNumToRender={15}
+        keyExtractor={_keyExtractor}
+        renderItem={_renderItem}
+        windowSize={30}
+      />
+    </>
   );
 };
 
