@@ -10,6 +10,8 @@ import {
   StyledBlock,
   StyledInputContainer,
   Flex2,
+  StyledTextError,
+  StyledTextWelcome,
 } from '../../configs/stylesGlobal';
 import {
   StyledHomeProgressContainer,
@@ -17,8 +19,6 @@ import {
   StyledText,
   StyledHomeImage,
   StyledHomeImageWrapper,
-  StyledTextError,
-  StyledTextWelcome,
 } from './styles';
 import ProgressBar from '../../components/progressBar';
 import moment from 'moment';
@@ -185,7 +185,7 @@ const Home = ({componentId}: {componentId: string}): JSX.Element => {
                 ) : (
                   <StyledTextWelcome>
                     Welcome!{'\n'}
-                    You can select a car on edit screen.
+                    Please select a car.
                   </StyledTextWelcome>
                 )}
               </>

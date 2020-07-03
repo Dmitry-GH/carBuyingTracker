@@ -34,6 +34,7 @@ const initialState: UserState = {
   pending: false,
   error: null,
   isLoggedIn: false,
+  isRedirectedToRegister: false,
 };
 
 const user = (state = initialState, action: UserActionTypes_I): UserState => {
@@ -53,6 +54,7 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
         isLoggedIn: true,
         userName: action.userData.user.displayName,
         uid: action.userData.user.uid,
+        isRedirectedToRegister: false,
       };
     case USER_LOGIN_FAILURE:
       return {
@@ -60,6 +62,7 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
         pending: false,
         isLoggedIn: false,
         error: action.error,
+        isRedirectedToRegister: false,
       };
     case USER_REGISTER_REQUEST:
       return {
@@ -156,6 +159,7 @@ const user = (state = initialState, action: UserActionTypes_I): UserState => {
     case USER_LOGIN_REDIRECT_TO_REGISTER:
       return {
         ...initialState,
+        isRedirectedToRegister: true,
       };
     case USER_LOGOUT:
       return {

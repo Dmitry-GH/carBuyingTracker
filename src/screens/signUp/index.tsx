@@ -5,6 +5,7 @@ import {userRegisterRequest} from '../../store/user/actions';
 import {AuthButton} from '../../components/buttons';
 import {goHome} from '../navigation';
 import styles from './styles';
+import {StyledTextError} from '../../configs/stylesGlobal';
 
 const SignUp = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -24,6 +25,12 @@ const SignUp = (): JSX.Element => {
 
   return (
     <View style={styles.container}>
+      {user.isRedirectedToRegister && (
+        <StyledTextError>
+          You don't have an account yet!{'\n'}
+          Please sign up!
+        </StyledTextError>
+      )}
       <AuthButton
         onPress={() => fetchNewUser()}
         title="Sign up with Google"

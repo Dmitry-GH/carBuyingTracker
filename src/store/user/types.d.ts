@@ -6,6 +6,7 @@ interface UserInfo {
   isLoggedIn: boolean;
   userCar: UserCar;
   collectedMoney: number;
+  isRedirectedToRegister: boolean;
 }
 
 type UserState = UserInfo;

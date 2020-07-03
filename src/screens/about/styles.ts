@@ -36,7 +36,7 @@ export const StyledHeader = styled.Text`
   font-size: 35px;
   text-align: center;
   align-self: center;
-  margin-bottom: 15px;
+  margin: 5px 0;
 `;
 
 export const StyledText = styled.Text`

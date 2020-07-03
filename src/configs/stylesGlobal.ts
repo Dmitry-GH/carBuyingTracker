@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 import {Platform} from 'react-native';
 import {Divider} from 'react-native-elements';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {BORDER_RADIUS} from './index';
 
 export const Flex1 = styled.View`
   flex: 1;
@@ -78,5 +79,24 @@ export const StyledButtonsList = styled.View`
 export const StyledDivider = styled(Divider)`
   background-color: ${(props) => props.theme.primary};
   height: 3px;
-  margin: 30px 0;
+`;
+
+export const StyledTextError = styled.Text`
+  background-color: ${(props) => props.theme.error};
+  color: ${(props) => props.theme.main_text_white};
+  font-size: 20px;
+  padding: 25px;
+  margin: 15px;
+  text-align: center;
+  border-radius: ${BORDER_RADIUS}px;
+`;
+
+export const StyledTextWelcome = styled.Text`
+  background-color: ${(props) => props.theme.success};
+  color: ${(props) => props.theme.main_text_white};
+  font-size: 20px;
+  padding: 25px;
+  margin: 15px;
+  text-align: center;
+  border-radius: ${BORDER_RADIUS}px;
 `;
