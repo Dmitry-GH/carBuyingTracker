@@ -1,7 +1,10 @@
 {
   "name": "car-buying-tracker",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "private": true,
+  "author": "Dmitry Rudiuk",
+  "license": "MIT",
+  "description": "React Native app that helps you to track your collected money for buying a car.",
   "scripts": {
     "android": "npx react-native run-android",
     "ios": "npx react-native run-ios",
